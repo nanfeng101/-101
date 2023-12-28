@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MvMapper">
+    <select id="getMvDetail"  resultType="Mv" parameterType="MvByCon">
+        select * from mv
+        <if test="act=='byPage'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="classifymv" resultType="Mv" parameterType="String">
+        select * from mv
+        where name like concat('%',#{name},'%')
+    </select>
+    <update id="updateMvPic">
+        update mv set pic=#{pic}
+        where id1=#{id}
+    </update>
+    <insert id="addMv" parameterType="Mv">
+        insert into mv (name,introduce,style,url) values (#{name},#{introduce},#{style},#{url})
+    </insert>
+    <delete id="deleteMv" parameterType="int">
+        delete from mv
+        where id1=#{id}
+    </delete>
+    <select id="selectIdMv" resultType="Mv" parameterType="int">
+        select * from mv
+        where id1=#{id}
+    </select>
+    <update id="updateMv" parameterType="Mv">
+        update mv
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="introdece!= null">
+                introdece = #{introdece},
+            </if>
+            <if test="style != null">
+                style = #{style},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="getMvPlay" resultType="Mv">
+        select * from mv
+        order by play_sum desc limit 12
+    </select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.SystemhomeMapper">
+    <select id="selectUserSex"  resultType="UserEntity" parameterType="int">
+        select * from consumer where sex = #{sex}
+    </select>
+    <select id="selectSingerSex"  resultType="Singer" parameterType="int">
+        select * from singer where sex = #{sex}
+    </select>
+    <select id="selectSingerLocation1"  resultType="Song_list" parameterType="String">
+        select * from song_list where style like concat("%",#{style},"%")
+    </select>
+    <select id="selectSingerLocation"  resultType="Singer" parameterType="String">
+        select * from singer where location like concat("%",#{location},"%")
+    </select>
+</mapper>

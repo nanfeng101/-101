@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ConsumerMapper">
+    <select id="getConsumer"  resultType="Consumer" parameterType="ConsumerByCon">
+        select * from consumer
+        <if test="act=='byCon'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getIdConsumer" resultType="Consumer" parameterType="int">
+        select * from consumer
+        where id = #{id}
+    </select>
+    <select id="selectConsumer" resultType="Consumer" parameterType="String">
+        select * from consumer
+        where username like concat("%",#{select_name},"%")
+    </select>
+    <update id="updateAcator">
+        update consumer set avator=#{acator}
+        where id=#{id}
+    </update>
+    <insert id="addConsumer" parameterType="Consumer">
+        insert into consumer (username,password,sex,phone_num,email,birth,location,introduction,create_time) values (#{username},#{password},#{sex},#{phone_num},#{email},#{birth},#{location},#{introduction},#{create_time})
+    </insert>
+    <delete id="deleteConsumer" parameterType="int">
+        delete from consumer
+        where id=#{id}
+    </delete>
+    <update id="updateConsumer" parameterType="Consumer">
+        update consumer
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="phone_num != null">
+                phone_num = #{phone_num},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="location != null">
+                location = #{location},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction},
+            </if>
+            <if test="update_time != null">
+                update_time = #{update_time},
+            </if>
+<!--            <if test="password_jie != null">-->
+<!--                password_jie = #{password_jie},-->
+<!--            </if>-->
+        </set>
+        where id = #{id}
+    </update>
+    <select id="userLogin" resultType="Consumer" parameterType="Consumer">
+        select * from consumer
+        where username = #{username}
+        and password = #{password}
+    </select>
+    <insert id="userRegister" parameterType="Consumer">
+        insert into consumer (username,password,create_time) values (#{username},#{password},#{create_time})
+    </insert>
+    <insert id="shoucang" parameterType="int">
+        insert into collect (user_id,song_id) values (#{userid},#{songid})
+    </insert>
+    <select id="selectShoucang" resultType="Collect" parameterType="int">
+        select * from collect
+        where user_id = #{userid}
+        and song_id = #{songid}
+    </select>
+    <select id="getMySong" resultType="Collect" parameterType="int">
+        select * from collect
+        where user_id = #{id}
+    </select>
+    <select id="getMySong_list" resultType="Song_list" parameterType="int">
+        select * from song_list
+        where id = #{id}
+    </select>
+    <select id="getMyMv" resultType="Mv" parameterType="int">
+        select * from mv
+        where id1 = #{id}
+    </select>
+    <select id="getUserCreateSong_list" resultType="Song_list" parameterType="int">
+        select * from song_list
+        where username_id = #{id}
+    </select>
+    <select id="getIdUserName" resultType="String" parameterType="int">
+        select username from consumer
+        where id = #{id}
+    </select>
+    <select id="getAttention" resultType="Singer" parameterType="int">
+        select * from singer
+        where id = #{id1}
+    </select>
+    <select id="getFans" resultType="Consumer" parameterType="int">
+        select * from consumer
+        where id = #{id2}
+    </select>
+    <select id="getAttention_user" resultType="Consumer" parameterType="int">
+        select * from consumer
+        where id = #{id3}
+    </select>
+</mapper>

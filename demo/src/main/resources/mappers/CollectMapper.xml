@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CollectMapper">
+    <select id="getCollect" resultType="collect" parameterType="int">
+        select collect.id,name from collect,song
+        where collect.song_id = song.id
+        and collect.user_id = #{id}
+    </select>
+    <delete id="deleteCollect" parameterType="int">
+        delete from collect
+        where id = #{id}
+    </delete>
+    <insert id="Song_listShouCang">
+        insert into collect (user_id,song_list_id) values (#{id1},#{id2})
+    </insert>
+    <insert id="MvShouCang">
+        insert into collect (user_id,mv_id) values (#{id1},#{id2})
+    </insert>
+    <insert id="Attention_singer">
+        insert into collect (user_id,singer_id) values (#{id1},#{id2})
+    </insert>
+    <select id="isSong_listExit" resultType="Collect" parameterType="int">
+        select * from collect
+        where song_list_id = #{id2}
+        and user_id = #{id1}
+    </select>
+    <select id="isMvExit" resultType="Collect" parameterType="int">
+        select * from collect
+        where mv_id = #{id2}
+        and user_id = #{id1}
+    </select>
+    <select id="isSingerExit" resultType="Collect" parameterType="int">
+        select * from collect
+        where singer_id = #{id2}
+        and user_id = #{id1}
+    </select>
+</mapper>

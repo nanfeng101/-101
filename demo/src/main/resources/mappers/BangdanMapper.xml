@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BangdanMapper">
+    <select id="getDouyin"  resultType="Bangdan" >
+        select * from song,bangdan
+        where song_id = id
+    </select>
+    <select id="getBiao"  resultType="Bangdan" >
+        select * from song,bangdan
+        where biao_id = id
+    </select>
+    <select id="getTopSong" resultType="Song" parameterType="SongByCon">
+        select * from song
+        order by play_sum desc
+        <if test="act=='byCon'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+</mapper>

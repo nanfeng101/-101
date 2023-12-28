@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CommentMapper">
+    <select id="getComment" resultType="Comment" parameterType="int">
+        select comment.id,username,content from comment,consumer
+        where user_id = consumer.id
+        and song_id = #{id}
+    </select>
+    <update id="deleteComment" parameterType="int">
+        update from comment
+        set song_id=null
+        where id = #{id}
+    </update>
+    <select id="getSong_listComment" resultType="Comment" parameterType="int">
+        select comment.id,username,user_id,location,comment.create_time,content,avator,type,show1,up,up_user from comment,consumer
+        where user_id = consumer.id
+        and song_list_id = #{id}
+    </select>
+    <update id="deleteSong_ListComment" parameterType="int">
+        update from comment
+        set song_list_id=null
+        where id = #{id}
+    </update>
+    <insert id="addComment">
+        insert into comment (user_id,song_list_id,content,type,create_time,show1) values (#{user_id},#{song_list_id},#{content},#{type},#{creat_time},false)
+    </insert>
+    <insert id="addHuifuComment">
+        insert into comment (user_id,song_list_id,content,type,create_time,show1,up,up_user) values (#{user_id},#{song_list_id},#{content},#{type},#{creat_time},false,#{up},#{up_user})
+    </insert>
+    <select id="getMvComment" resultType="Comment" parameterType="int">
+        select comment.id,username,user_id,location,comment.create_time,content,avator,type,show1,up,up_user from comment,consumer
+        where user_id = consumer.id
+        and mv_id = #{id}
+    </select>
+    <insert id="addMvComment">
+        insert into comment (user_id,mv_id,content,type,create_time,show1) values (#{user_id},#{song_list_id},#{content},#{type},#{creat_time},false)
+    </insert>
+    <insert id="addMvHuifuComment">
+        insert into comment (user_id,mv_id,content,type,create_time,show1,up,up_user) values (#{user_id},#{song_list_id},#{content},#{type},#{creat_time},false,#{up},#{up_user})
+    </insert>
+    <select id="getUser_id" resultType="int" parameterType="int">
+        select user_id from comment
+        where id = #{id}
+    </select>
+    <select id="getUserName" resultType="String" parameterType="int">
+        select username from consumer
+        where id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.SingerMapper">
+    <select id="selectSingerPage"  resultType="Singer" parameterType="SingerByCon">
+        select id,name,sex,pic,birth,location,introduction,attention_sum from singer
+        <if test="act=='byPage'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getSexSingerPage"  resultType="Singer" parameterType="SingerByCon">
+        select id,name,sex,pic,birth,location,introduction,attention_sum from singer
+            where sex = #{sex}
+        <if test="act=='byPage'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectSinger"  resultType="Singer" parameterType="String">
+        select id,name,sex,pic,birth,location,introduction from singer
+        where name like concat('%',#{name},'%')
+    </select>
+    <update id="updatePic">
+        update singer set pic=#{pic}
+        where id=#{id}
+    </update>
+    <insert id="addSinger" parameterType="Singer">
+        insert into singer (name,sex,birth,location,introduction) values (#{name},#{sex},#{birth},#{location},#{introduction})
+    </insert>
+    <delete id="deleteSinger" parameterType="int">
+        delete from singer
+        where id=#{id}
+    </delete>
+    <select id="getIdSinger"  resultType="Singer" parameterType="int">
+        select id,name,sex,pic,birth,location,introduction,attention_sum from singer
+        where id=#{id}
+    </select>
+    <select id="getNameSinger"  resultType="Singer" parameterType="String">
+        select id,name,sex,pic,birth,location,introduction,attention_sum from singer
+        where name like #{name}
+    </select>
+    <update id="updateSinger" parameterType="Singer">
+        update singer
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="location != null">
+                location = #{location},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="searchNameId" resultType="Singer" parameterType="Song">
+        select * from singer
+        where name = #{name}
+    </select>
+    <select id="getSong_to_qiantai" resultType="Singer" parameterType="int">
+        select * from Singer
+        where id = #{id}
+    </select>
+</mapper>

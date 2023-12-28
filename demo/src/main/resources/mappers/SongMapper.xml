@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.SongMapper">
+    <select id="getSongPage"  resultType="Song" parameterType="SongByCon">
+        select * from song
+        <if test="act=='byCon'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <update id="updateSongPic">
+        update song set pic=#{pic}
+        where id=#{id}
+    </update>
+    <delete id="deleteSong" parameterType="int">
+        delete from song
+        where id=#{id}
+    </delete>
+    <select id="getIdSong"  resultType="Song" parameterType="int">
+        select * from song
+        where id=#{id}
+    </select>
+    <select id="searchSongName"  resultType="Song" parameterType="String">
+        select * from song
+        where name like concat('%',#{val},'%')
+    </select>
+    <select id="searchSongSinger_id"  resultType="Song" parameterType="int">
+        select * from song
+        where singer_id=#{id}
+    </select>
+    <update id="updateSong" parameterType="Song">
+        update song
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="singer_id != null">
+                singer_id = #{singer_id},
+            </if>
+            <if test="update_time != null">
+                update_time = #{update_time},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction},
+            </if>
+            <if test="lyric != null">
+                lyric = #{lyric},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="addSong" parameterType="Song">
+        insert into song (singer_id,name,introduction,create_time,lyric,url) values (#{singer_id},#{name},#{introduction},#{create_time},#{lyric},#{url})
+    </insert>
+    <update id="updateSongUrl">
+        update song set Url=#{url}
+        where id=#{id}
+    </update>
+    <select id="getSong_list_to_qianttai2" resultType="Song" parameterType="int">
+        select * from song,list_song
+        where list_song.song_id=song.id
+        and list_song.song_list_id = #{id}
+    </select>
+    <select id="getSong_to_qiantai2" resultType="Song" parameterType="int">
+        select * from song
+          where singer_id = #{id}
+    </select>
+    <select id="getPlay_sum" resultType="int" parameterType="int">
+        select play_sum from song
+        where id = #{id}
+    </select>
+    <update id="updatePlay_sum" parameterType="int">
+        update song set play_sum = #{sum}+1
+        where id = #{id}
+    </update>
+    <select id="getSongPlay" resultType="Song">
+        select * from song
+        order by play_sum desc limit 12
+    </select>
+</mapper>

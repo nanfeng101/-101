@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.Song_listMapper">
+    <select id="getSong_listPage"  resultType="Song_list" parameterType="Song_listByCon">
+        select * from song_list
+        <if test="act=='byCon'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getStyleSong_list"  resultType="Song_list" parameterType="Song_listByCon">
+        select * from song_list
+        where style = #{style}
+        <if test="act=='byCon'">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <update id="updateSong_listPic">
+        update song_list set pic=#{pic}
+        where id=#{id}
+    </update>
+    <select id="getIdSong_list" resultType="Song_list" parameterType="int">
+        select * from song_list
+        where id = #{id}
+    </select>
+    <select id="selectTitleSong_list" resultType="Song_list" parameterType="String">
+        select * from song_list
+        where title like concat("%",#{title},"%")
+    </select>
+    <update id="updateSong_list" parameterType="Song_list">
+        update song_list
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction},
+            </if>
+            <if test="style != null">
+                style = #{style},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="addSong_list" parameterType="Song_list">
+        insert into song_list (title,introduction,style) values (#{title},#{introduction},#{style})
+    </insert>
+    <delete id="deleteSong_list" parameterType="int">
+        delete from song_list
+        where id = #{id}
+    </delete>
+    <select id="getSong_listContent" resultType="List_song" parameterType="int">
+        select list_song.id,name from  list_song,song
+        where song_id = song.id
+        and song_list_id = #{id}
+    </select>
+    <delete id="deleteSong_ListSong" parameterType="int">
+        delete from list_song
+        where song_list_id = #{id}
+    </delete>
+    <select id="getSong_list_to_qianttai" resultType="Song_list" parameterType="int">
+        select song_list.id,title,song_list.introduction,pic,style,username,play_sum from song_list,consumer
+        where song_list.id = #{id}
+        and song_list.username_id=consumer.id
+    </select>
+    <select id="getAndroidSong_listPage"  resultType="Song_list" parameterType="Song_listByCon">
+        select * from song_list
+        limit #{currentPage}, #{pageSize}
+    </select>
+    <select id="getAndroidSong_listMusic" resultType="Bangdan" parameterType="int">
+        select * from  song,list_song
+        where song_list_id = #{id}
+          and song.id=song_id
+    </select>
+</mapper>
