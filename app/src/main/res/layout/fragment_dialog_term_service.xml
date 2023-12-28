@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <!--    标题-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_term_biaoti"
+        android:textSize="25dp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_term_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="@color/black" />
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="同意"
+        android:textStyle="bold"
+        app:cornerRadius="20dp" />
+    <Button style="@style/Widget.AppCompat.Button.Borderless"
+        android:id="@+id/disgree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="不同意并退出应用"
+        android:textColor="@color/md_theme_dark_onSurface"
+        />
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.andorid_project">
+    <!-- app请求网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- app请求相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- app请求麦克风权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- app请求地理位置权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 读取手机的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于定义用户手机缺乏必要的硬件后能否使用 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <application
+        android:name=".AppContext"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Andorid_project"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".shouye.song_list.Song_listActivity"
+            android:exported="true" />
+        <activity
+            android:name=".shouye.geci.geciActivity"
+            android:exported="false"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".shouye.ShouyeActivity"
+            android:exported="false"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".LoginOrRegister.LoginActivity"
+            android:exported="false"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".Guide.GuideActivity"
+            android:exported="false"
+            android:theme="@style/TransparentStatusBarTheme" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/TransparentStatusBarTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="440dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:background="@drawable/shape_music_list"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/loop"/>
+        <TextView
+            android:id="@+id/music_list_gequSum"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部循环（12首）"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/musiclistadd"/>
+        <ImageView
+            android:id="@+id/music_list_all_delete"
+            android:layout_marginLeft="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/alldelete"/>
+
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/musicList_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"/>
+    <TextView
+        android:id="@+id/music_list_close"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="关闭"
+        android:textColor="#FD0707"
+        android:textSize="20dp"/>
+
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/music_list_single_play"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/music_list_gequ"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="全部循环（12首）"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+        <ImageView
+            android:id="@+id/music_list_single_delete"
+            android:layout_marginLeft="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/musiclist_delete"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shouye.song_list.Song_listActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView android:layout_marginLeft="20dp"
+            android:id="@+id/song_list_fanhui"
+            android:layout_width="30dp"
+            android:scaleType="centerCrop"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/geci_ganhui"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+            <ImageView
+                android:id="@+id/song_list_image"
+                android:layout_width="150dp"
+                android:scaleType="centerCrop"
+                android:layout_height="150dp"
+                android:src="@drawable/major_lunbotu3"/>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/song_list_theme"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="000000"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/song_list_music_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/white"
+            android:minWidth="130dp"
+            android:text="播放"
+            android:textColor="@color/md_theme_dark_onSurface"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"
+            app:cornerRadius="20dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/song_list_music_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/white"
+            android:minWidth="130dp"
+            android:text="收藏"
+            android:textColor="@color/md_theme_dark_onSurface"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"
+            app:cornerRadius="20dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
+        <TextView
+            android:id="@+id/song_list_music_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共0首"
+            android:textColor="#000000"/>
+        <ImageView
+            android:layout_marginLeft="240dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/download"/>
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/piliang"/>
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+
+</LinearLayout>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shouye.geci.geciActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView android:layout_marginLeft="20dp"
+            android:id="@+id/geci_fanhui"
+        android:layout_width="30dp"
+        android:scaleType="centerCrop"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/geci_ganhui"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+            <ImageView
+                android:id="@+id/geci_music_pic"
+                android:layout_width="270dp"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/major_lunbotu4"/>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/geci_biaoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="你啊我啊风阿"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/geci_zhuozhe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="李怡然同学"
+                android:textSize="15dp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
+            android:background="@drawable/shape_geci_shoucang">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/geci_shoucang"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        >
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/geci_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你啊我啊风阿"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/geci_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李怡然同学"
+            android:textSize="15dp"
+            android:textColor="@color/md_theme_dark_onSurface"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+    <SeekBar style="@style/Widget.AppCompat.SeekBar"
+        android:id="@+id/seekbar"
+        android:layout_width="320dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:max="100"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_height="20dp">
+            <TextView
+                android:id="@+id/geci_time_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textSize="15dp"
+                android:textColor="@color/md_theme_dark_onSurface"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/geci_time_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textSize="15dp"
+                android:textColor="@color/md_theme_dark_onSurface"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="60dp">
+        />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/geco_loop"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/loop" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/geco_perious_play"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/perious_music" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/geci_play_background"
+            android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/geci_play"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="13dp"
+            android:src="@drawable/play_white" />
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/geci_next_music"
+            android:layout_marginTop="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/next_play"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/geci_play_list"
+            android:layout_marginTop="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/play_list" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

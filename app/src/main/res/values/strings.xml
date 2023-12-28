@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">云音乐</string>
+    <string name="dialog_term_biaoti">服务条款和隐私协议提示</string>
+    <string name="dialog_term_content">
+        <Data><![CDATA[<p>&nbsp;&nbsp;&nbsp;本软件尊重并保护所有用户的个人隐私及意愿</p>
+        <p>1 请务必认真阅读和理解本《APP服务协议及隐私协议》(以下简称《协议》)中规定的所有权利和限制。</p>
+        <p>2 除非另有明确规定，重庆公租房APP平台所推出的新功能、新服务，均无条件的使用本协议。</p>
+        <p>3 APP平台保留在任何时候修改本协议条款的权利，且无需另行通知，用户在使用服务时应关注并遵守；当发生有关争议时，以最新的协议文本为准。</p>
+        <p>4. 鉴于本科技系统使用网络服务的特殊性，不担保网络服务一定满足用户的要求，也不担保网络服务不会中断，对网络服务的及时性、安全性和准确性也不作担保。</p>
+        <p>5. 对于因电信系统或互联网网络故障、计算机故障、计算机系统问题或其它任何不可抗力原因而产生损失， 本平台系统不承担任何责任，但将尽力减少因此给用户造成的损失和影响。</p>
+        ]]></Data>
+    </string>
+    <string name="login_or_register">登录或注册</string>
+    <string name="experience_now">立即体验</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="shouye_str">首页</string>
+    <string name="tingshu_str">听书</string>
+    <string name="bendi_str">本地</string>
+    <string name="wod_str">我的</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+</resources>
