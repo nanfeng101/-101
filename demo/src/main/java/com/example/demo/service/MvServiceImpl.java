@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,5 +82,12 @@ public class MvServiceImpl implements MvService{
         else{
             return "no";
         }
+    }
+
+    //安卓方法
+    public List<Mv> getAndroidMvDetail(){
+        MvByCon mvByCon = new MvByCon();
+        mvByCon.setAct("byNoPage");
+        return mvmapper.getMvDetail(mvByCon);
     }
 }

@@ -14,4 +14,6 @@ public interface MvService {
     String deleteMv(int id)throws Exception;
     Mv selectIdMv(int id);
     String updateMv(Mv mv);
+
+    List<Mv> getAndroidMvDetail();
 }

@@ -49,4 +49,10 @@ public class MvController {
     public String updateMv(Mv mv){
         return mvService.updateMv(mv);
     }
+
+    @PostMapping("/getAndroidMv")
+    //安卓方法
+    public List<Mv> getAndroidMv(int id){
+        return mvService.getAndroidMvDetail();
+    }
 }
