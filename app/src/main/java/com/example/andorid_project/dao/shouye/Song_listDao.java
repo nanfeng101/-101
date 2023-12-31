@@ -30,6 +30,7 @@ import okhttp3.Response;
 
 public class Song_listDao {
     public static String data;
+    public String inform;
     public void getSong_listMusic(String id){
         OkHttpClient httpClient = new OkHttpClient();
         FormBody formBody = new FormBody.Builder().add("id",id).build();
@@ -44,8 +45,26 @@ public class Song_listDao {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String str = response.body().string();
-                data=str;
+                data = response.body().string();
+            }
+        });
+    }
+
+    public void send(String str){
+        OkHttpClient httpClient = new OkHttpClient();
+        FormBody formBody = new FormBody.Builder().add("str",str).build();
+        String url= Quanju.url1+"send";
+        Request request = new Request.Builder().url(url).post(formBody).build();
+        Call call=httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d(TAG, "onFailure: 服务器错误");
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                inform = response.body().string();
             }
         });
     }

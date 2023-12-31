@@ -41,7 +41,7 @@ public class MusicListFragement extends BaseDialogFragment {
     private View.OnClickListener onClickListener;
     private Context context;
     private View v;
-    private RelativeLayout frameLayout;
+    private FrameLayout frameLayout;
     private FragmentManager fragmentManager1;
     public static MusicListAdapter musicListAdapter;
     public static TextView music_list_gequSum;
@@ -53,7 +53,7 @@ public class MusicListFragement extends BaseDialogFragment {
         setCancelable(false);
 
     }
-    public MusicListFragement(Context con, RelativeLayout frameLayout1){
+    public MusicListFragement(Context con, FrameLayout frameLayout1){
         context=con;
         frameLayout=frameLayout1;
     }
@@ -111,7 +111,7 @@ public class MusicListFragement extends BaseDialogFragment {
         v=inflater.inflate(R.layout.music_list,container,false);
         return v;
     }
-    public void show(FragmentManager fragmentManager, View.OnClickListener onClickListener, Context con, RelativeLayout frameLayout1){
+    public void show(FragmentManager fragmentManager, View.OnClickListener onClickListener, Context con, FrameLayout frameLayout1){
         MusicListFragement musicListFragement = new MusicListFragement(con,frameLayout1);
         musicListFragement.onClickListener=onClickListener;
         musicListFragement.show(fragmentManager,"TermServiceDialogFragment");

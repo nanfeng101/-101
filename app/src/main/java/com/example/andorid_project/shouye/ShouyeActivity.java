@@ -26,6 +26,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -50,6 +51,7 @@ import com.example.andorid_project.shouye.enity.Song;
 import com.example.andorid_project.shouye.geci.LrcBean;
 import com.example.andorid_project.shouye.geci.PraseLrc;
 import com.example.andorid_project.shouye.geci.geciActivity;
+import com.example.andorid_project.shouye.song_list.Song_listActivity;
 import com.example.andorid_project.shouye.until.ShouyeUntil;
 import com.example.andorid_project.until.TengxunPreferenceUtil;
 import com.flyco.tablayout.CommonTabLayout;
@@ -59,6 +61,8 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,20 +94,34 @@ public class ShouyeActivity extends BaseViewActivity {
     public static TextView shouye_zhuzhe;
     public static List<Bangdan> bangdanList;
     public static ImageView music_play;
-    public static RelativeLayout overlay;
+    public static FrameLayout overlay;
+    public static ImageView drawer_touciang;
+    public static TextView drawer_username;
     public Context getContext(){
         return mContext;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shouye);
     }
 
     @Override
     protected void initDatum() {
+        TengxunPreferenceUtil tengxunPreferenceUtil1 = new TengxunPreferenceUtil();
+        drawer_touciang = findViewById(R.id.shouye_touxiang_login);
+        drawer_username = findViewById(R.id.shouye_wenzi_login);
+        if(tengxunPreferenceUtil1.isUserLogin()){
+            drawer_touciang.setImageResource(tengxunPreferenceUtil1.getUserPic());
+            drawer_username.setText(tengxunPreferenceUtil1.getUserName());
+        }
+        else{
+            drawer_touciang.setImageResource(R.drawable.wei_login);
+            drawer_username.setText("立即登录");
+        }
+
         super.initDatum();
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         musicXinxi = CheshiData.add();
         qia = findViewById(R.id.qianwang);
         qia.setImageResource(musicXinxi.get(musicId).getPic());
@@ -154,18 +172,10 @@ public class ShouyeActivity extends BaseViewActivity {
         tengxunPreferenceUtil.setPlayGeci(false);
         tengxunPreferenceUtil.setPlayMusic(true);
         mediaPlayer = MediaPlayer.create(this,R.raw.music);
-//        try{
-//            mediaPlayer.setDataSource("http://124.220.16.147:7001/zf/可能.mp3");
-//            mediaPlayer.prepare();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
         music_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-//                    mediaPlayer.setDataSource(audioFileUrl);
-//                    mediaPlayer.prepare();
                     if(tengxunPreferenceUtil.isPlayMusic()){
                         tengxunPreferenceUtil.setPlayMusic(false);
                         Log.d(TAG, "onClick: play music");
@@ -176,8 +186,6 @@ public class ShouyeActivity extends BaseViewActivity {
                         tengxunPreferenceUtil.setPlayMusic(true);
                         mediaPlayer.pause();
                         Log.d(TAG, "onClick: play stop");
-//                        mediaPlayer[0].release();
-//                        mediaPlayer[0] = MediaPlayer.create(ShouyeActivity.this,R.raw.music);
                         music_play.setImageResource(R.drawable.play);
                         geciActivity.geci_play.setImageResource(R.drawable.play_white);
                     }
@@ -230,9 +238,6 @@ public class ShouyeActivity extends BaseViewActivity {
                 }catch(Exception e){
                     Log.d(TAG, bangdanList.get(musicId).getName());
                 }
-//                qia.setImageResource(musicXinxi.get(musicId).getPic());
-//                String xinxi = musicXinxi.get(musicId).getBiaoti()+"-"+musicXinxi.get(musicId).getZhuozhe();
-//                shouye_zhuzhe.setText(xinxi);
                 Glide.with(ShouyeActivity.this).load(Quanju.url1+bangdanList.get(musicId).getPic()).into(qia);
                 shouye_zhuzhe.setText(bangdanList.get(musicId).getName());
                 geciActivity.geci_biaoti.setText(bangdanList.get(musicId).getName());
@@ -257,7 +262,7 @@ public class ShouyeActivity extends BaseViewActivity {
             public void onClick(View v) {
                 overlay = findViewById(R.id.overlay);
                 overlay.setBackgroundColor(Color.BLACK); // 设置蒙版颜色为黑色，可以根据需要调整
-                overlay.setAlpha((float) 0.6); // 设置初始透明度为0
+                overlay.setAlpha((float) 0.5); // 设置初始透明度为0
                 MusicListFragement musicListFragement = new MusicListFragement(ShouyeActivity.this,overlay);
                 musicListFragement.show(getSupportFragmentManager(),new View.OnClickListener() {
                     @Override
@@ -269,20 +274,48 @@ public class ShouyeActivity extends BaseViewActivity {
             }
         });
         //抽屉监听事件
-            DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-            ImageView open = findViewById(R.id.major_drawer);
-            RecyclerView recyclerView = findViewById(R.id.drawer_recyclerView);
-            open.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DrawerAdapater song_listAdapater = new DrawerAdapater(ShouyeActivity.this);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ShouyeActivity.this,LinearLayoutManager.VERTICAL,false);
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    //设置适配器到控件
-                    recyclerView.setAdapter(song_listAdapater);
-                    drawerLayout.openDrawer(GravityCompat.START);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView open = findViewById(R.id.major_drawer);
+        RecyclerView recyclerView = findViewById(R.id.drawer_recyclerView);
+        open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerAdapater song_listAdapater = new DrawerAdapater(ShouyeActivity.this);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ShouyeActivity.this,LinearLayoutManager.VERTICAL,false);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                //设置适配器到控件
+                recyclerView.setAdapter(song_listAdapater);
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        //抽屉跳转登录界面监听事件
+        ImageView iconLogin = findViewById(R.id.shouye_touxiang_login);
+        iconLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tengxunPreferenceUtil.isUserLogin()){
+                    Log.d(TAG, "onClick: 进入用户界面");
+                }else{
+                    Log.d(TAG, "onClick: 进入登录界面");
+                    Intent intent = new Intent(ShouyeActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
-            });
+            }
+        });
+        TextView textLogin = findViewById(R.id.shouye_wenzi_login);
+        textLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tengxunPreferenceUtil.isUserLogin()){
+                    Log.d(TAG, "onClick: 进入用户界面");
+                }else{
+                    Log.d(TAG, "onClick: 进入登录界面");
+                    Intent intent = new Intent(ShouyeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         //加载数据
         handler.postDelayed(new Runnable() {
             @Override
@@ -303,8 +336,6 @@ public class ShouyeActivity extends BaseViewActivity {
                         list.add(bangdan);
                     }
                     bangdanList=list;
-//                    JSONObject jsonObject1 = new JSONObject(str);
-//                    song=gson.fromJson(String.valueOf(jsonObject1),Song.class);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -353,8 +384,6 @@ public class ShouyeActivity extends BaseViewActivity {
             Log.d(TAG, bangdanList.get(musicId).getName());
         }
         Glide.with(this).load(Quanju.url1+bangdanList.get(musicId).getPic()).into(qia);
-//        qia.setImageResource(musicXinxi.get(musicId).getPic());
-//        String xinxi = musicXinxi.get(musicId).getBiaoti()+"-"+musicXinxi.get(musicId).getZhuozhe();
         shouye_zhuzhe.setText(bangdanList.get(musicId).getName());
     }
 

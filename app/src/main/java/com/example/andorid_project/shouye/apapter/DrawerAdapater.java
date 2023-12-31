@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
+import com.example.andorid_project.shouye.ShouyeActivity;
 import com.example.andorid_project.shouye.enity.Song_list;
 import com.example.andorid_project.shouye.song_list.Song_listActivity;
+import com.example.andorid_project.until.TengxunPreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,18 @@ public class DrawerAdapater extends RecyclerView.Adapter<DrawerAdapater.ViewHold
             content.setText(str[id]);
             ImageView iconView = (ImageView) itemView.findViewById(R.id.drawer_content_icon);
             iconView.setImageResource(iconarr[id]);
+            LinearLayout layout = (LinearLayout) itemView.findViewById(R.id.drawer_content_layout);
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(id==8){
+                        TengxunPreferenceUtil tengxunPreferenceUtil = new TengxunPreferenceUtil();
+                        tengxunPreferenceUtil.setUserLogin(false);
+                        ShouyeActivity.drawer_touciang.setImageResource(R.drawable.wei_login);
+                        ShouyeActivity.drawer_username.setText("立即登录");
+                    }
+                }
+            });
         }
     }
 }
