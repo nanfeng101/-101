@@ -16,6 +16,7 @@ public class TengxunPreferenceUtil {
     private static final String USER_NAME_SERVICE = "USER_NAME_SERVICE";
     private static final String USER_PIC_SERVICE = "USER_PIC_SERVICE";
     private static final String FIRST_LOGIN_SERVICE = "FIRST_LOGIN_SERVICE";
+    private static final String USER_PHONE_SERVICE = "USER_PHONE_SERVICE";
     private MMKV kv=MMKV.defaultMMKV();
 
     //用来设置用户同意了协议，下次再打开软件就不会显示协议
@@ -75,5 +76,13 @@ public class TengxunPreferenceUtil {
     public boolean isFirstLogin(){
         return kv.getBoolean(FIRST_LOGIN_SERVICE,false);
     }
+    //用于存储用户账号
+    public void setUserPhone(String str){
+        kv.edit().putString(USER_PHONE_SERVICE,str);
+    }
+    public String getUserPhone(){
+        return kv.getString(USER_PHONE_SERVICE,"用户登录");
+    }
+
 
 }

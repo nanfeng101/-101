@@ -41,6 +41,7 @@ import com.example.andorid_project.LoginOrRegister.LoginActivity;
 import com.example.andorid_project.MainActivity;
 import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
+import com.example.andorid_project.dao.collect.MusicCollectDao;
 import com.example.andorid_project.dao.shouye.MusicDao;
 import com.example.andorid_project.shouye.Fragement.MusicListFragement;
 import com.example.andorid_project.shouye.apapter.DrawerAdapater;
@@ -97,6 +98,7 @@ public class ShouyeActivity extends BaseViewActivity {
     public static FrameLayout overlay;
     public static ImageView drawer_touciang;
     public static TextView drawer_username;
+    public static List<Bangdan> collectList;
     public Context getContext(){
         return mContext;
     }
@@ -161,6 +163,30 @@ public class ShouyeActivity extends BaseViewActivity {
         }
         MusicDao musicDao = new MusicDao();
         musicDao.getSongBangdan();
+
+        //
+        MusicCollectDao musicCollectDao = new MusicCollectDao();
+        musicCollectDao.getAndroidCollectMusic(tengxunPreferenceUtil1.getUserPhone());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Bangdan song = new Bangdan();
+                List<Bangdan> list1 = new ArrayList<>();
+                Gson gson = new Gson();
+                try {
+                    JSONArray jsonArray = new JSONArray(musicCollectDao.data);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                        song = gson.fromJson(String.valueOf(jsonObject1), Bangdan.class);
+                        list1.add(song);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                collectList=list1;
+
+            }
+        }, 1000);
 
     }
 

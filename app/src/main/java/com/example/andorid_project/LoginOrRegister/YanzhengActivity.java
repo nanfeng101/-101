@@ -98,6 +98,7 @@ public class YanzhengActivity extends BaseViewActivity {
                                 tengxunPreferenceUtil.setUserPic(R.drawable.user_pic);
                                 tengxunPreferenceUtil.setUsername(username);
                                 tengxunPreferenceUtil.setFirstLogin(true);
+                                tengxunPreferenceUtil.setUserPhone(getIntent().getStringExtra("phone"));
                             }
                             tengxunPreferenceUtil.setUserLogin(true);
                             Intent intent = new Intent(YanzhengActivity.this,ShouyeActivity.class);

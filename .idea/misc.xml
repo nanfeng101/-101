@@ -15,6 +15,7 @@
         <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_geci_shoucang.xml" value="0.2037037037037037" />
         <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_login_edittext_background.xml" value="0.25462962962962965" />
         <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_music_list.xml" value="0.14322916666666666" />
+        <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_myself_background.xml" value="0.25092592592592594" />
         <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_shouye_gedan.xml" value="0.14427083333333332" />
         <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_shouye_music_gedan_playsum.xml" value="0.14427083333333332" />
         <entry key="..\:/andorid_project/app/src/main/res/drawable/shape_vip.xml" value="0.25462962962962965" />
@@ -28,6 +29,7 @@
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_main.xml" value="0.18342391304347827" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_major.xml" value="0.176" />
+        <entry key="..\:/andorid_project/app/src/main/res/layout/activity_my_self.xml" value="0.264" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_shouye.xml" value="0.24644549763033174" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_song_list.xml" value="0.3287037037037037" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_yanzheng.xml" value="0.25364583333333335" />
@@ -45,6 +47,7 @@
         <entry key="..\:/andorid_project/app/src/main/res/layout/music_list_single.xml" value="0.22826086956521738" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/mv.xml" value="0.2" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/mv_single.xml" value="0.28888888888888886" />
+        <entry key="..\:/andorid_project/app/src/main/res/layout/myself_gedan_list.xml" value="0.25364583333333335" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/shouye_gedan_list.xml" value="0.576271186440678" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/song_list.xml" value="0.1" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/song_list_music.xml" value="0.6695652173913044" />

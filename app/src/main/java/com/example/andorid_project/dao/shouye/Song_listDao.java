@@ -50,6 +50,7 @@ public class Song_listDao {
         });
     }
 
+    //用于向用户发送短信
     public void send(String str){
         OkHttpClient httpClient = new OkHttpClient();
         FormBody formBody = new FormBody.Builder().add("str",str).build();

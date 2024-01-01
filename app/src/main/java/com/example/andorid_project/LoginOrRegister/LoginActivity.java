@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.andorid_project.Activity.BaseViewActivity;
 import com.example.andorid_project.R;
 import com.example.andorid_project.dao.shouye.Song_listDao;
+import com.example.andorid_project.until.TengxunPreferenceUtil;
 
 public class LoginActivity extends BaseViewActivity {
 
@@ -29,8 +30,12 @@ public class LoginActivity extends BaseViewActivity {
 
     @Override
     protected void initListeners() {
+        TengxunPreferenceUtil tengxunPreferenceUtil =new TengxunPreferenceUtil();
         super.initListeners();
         EditText phone = findViewById(R.id.editTextNumberPassword);
+        if(tengxunPreferenceUtil.isFirstLogin()){
+            phone.setText(tengxunPreferenceUtil.getUserPhone());
+        }
         Button login = findViewById(R.id.login_buton);
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setCornerRadius(80);

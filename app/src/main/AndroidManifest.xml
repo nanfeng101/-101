@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Andorid_project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".myself.MySelfActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginOrRegister.YanzhengActivity"
             android:exported="true" />
         <activity
