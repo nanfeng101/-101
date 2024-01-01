@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.text.TextExamineMapper">
+    <update id="updateExamine">
+        update text_status set isexamine=1
+        where text_id=#{id}
+    </update>
+    <insert id="addUserChat" parameterType="User_chat">
+        insert into user_chat (user_id,send_user_id,message,ispic,send_time,isread,is_send) values (#{user_id},#{send_user_id},#{message},0,#{send_time},0,#{is_send})
+    </insert>
+    <delete id="deleteExamine">
+        delete from text_status
+        where text_id=#{id}
+    </delete>
+    <delete id="deleteText">
+        delete from text
+        where id=#{id}
+    </delete>
+    <select id="selectIdText" resultType="Text_draft">
+        select * from text
+        where id=#{id}
+    </select>
+    <insert id="addTextDraft" parameterType="Text_draft">
+        insert into text_draft (content,user_id,pic,zhaiyao,biaoti,iscover) values (#{content},#{user_id},#{pic},#{zhaiyao},#{biaoti},#{iscover})
+    </insert>
+</mapper>

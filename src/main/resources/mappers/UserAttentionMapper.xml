@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserAttentionMapper">
+    <select id="getUserAttention" resultType="User_attention">
+        select * from user_attention,user
+        where user_id=#{id}
+        and attention_id = user.id
+    </select>
+    <select id="selectUserAttention" resultType="User_attention">
+        select * from user_attention
+        where attention_id=#{id}
+        and user_id = #{user_id}
+    </select>
+    <insert id="addUserAttention">
+        insert into user_attention (user_id,attention_id) values (#{user_id},#{attention_id})
+    </insert>
+    <delete id="deleteUserAttention">
+        delete from user_attention
+        where user_id=#{user_id}
+        and attention_id=#{attention_id}
+    </delete>
+    <insert id="addUserFensi">
+        insert into user_fensi (user_id,fensi_id) values (#{user_id},#{fensi_id})
+    </insert>
+    <delete id="deleteUserFensi">
+        delete from user_fensi
+        where user_id=#{user_id}
+        and fensi_id=#{fensi_id}
+    </delete>
+    <select id="getUserFensi" resultType="User_fensi">
+        select * from user_fensi,user
+        where user_id=#{id}
+        and fensi_id = user.id
+    </select>
+    <select id="getAttentionTextDetail" resultType="Text">
+        select * from text,text_type,text_status
+        where type_id=text_type.id1
+          and text.user_id=#{id}
+          and id=text_status.text_id
+          and isexamine=1
+        order by text.create_time desc
+    </select>
+
+</mapper>

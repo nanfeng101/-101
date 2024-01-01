@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserDataMapper">
+    <!--获取七天的更新数量和更新更新数量-->
+    <select id="getUserView" resultType="User_view_sum">
+        select * from user_view_sum
+        where time=#{time}
+        and text_id=#{text_id}
+    </select>
+    <insert id="addview">
+        insert into user_view_sum (text_id,time,sum) values (#{text_id},#{time},1)
+    </insert>
+    <update id="updateTextView">
+        update text set view_sum=#{view}
+        where id=#{id}
+    </update>
+    <update id="updateUser_view_sum">
+        update user_view_sum set sum=#{sum}
+        where id=#{id}
+    </update>
+<!--获取七天的点赞数量和更新点赞数量-->
+    <select id="getUserDian" resultType="User_dianzan_sum">
+        select * from user_dianzan_sum
+        where time=#{time}
+        and text_id=#{text_id}
+    </select>
+    <insert id="adddian">
+        insert into user_dianzan_sum (text_id,time,sum) values (#{text_id},#{time},1)
+    </insert>
+    <update id="updateTextDian">
+        update text set dianzan_sum=#{view}
+        where id=#{id}
+    </update>
+    <update id="updateUser_Dian_sum">
+        update user_dianzan_sum set sum=#{sum}
+        where id=#{id}
+    </update>
+    <!--获取七天的收藏数量和更新收藏数量-->
+    <select id="getUserCollect" resultType="User_collect_sum">
+        select * from user_collect_sum
+        where time=#{time}
+        and text_id=#{text_id}
+    </select>
+    <insert id="addcollect">
+        insert into user_collect_sum (text_id,time,sum) values (#{text_id},#{time},1)
+    </insert>
+    <update id="updateTextCollect">
+        update text set collect_sum=#{view}
+        where id=#{id}
+    </update>
+    <update id="updateUser_Collect_sum">
+        update user_collect_sum set sum=#{sum}
+        where id=#{id}
+    </update>
+    <insert id="addUser_collect">
+        insert into user_collect (user_id,text_id,collect_name_id) values (#{user_id},#{text_id},#{collect_name_id})
+    </insert>
+    <select id="selectUseer_collect" resultType="User_collect" parameterType="int">
+        select * from user_collect
+        where user_id = #{user_id}
+        and text_id = #{text_id}
+    </select>
+<!--    根据用户id获取文章id-->
+    <select id="getUserIdTexsId" resultType="Text" parameterType="int">
+        select id from text
+        where user_id=#{id}
+    </select>
+<!--    获取用户粉丝的数量，以及所在地区-->
+    <select id="getUserFensiLocation" resultType="User_fensi_data">
+        select location as name,count(*) as value from user_fensi,user
+        where user_id=#{id}
+        and fensi_id=user.id
+        group by location
+    </select>
+    <select id="getUserFensiSum" resultType="User_fensi">
+        select id from user_fensi
+        where user_id=#{id}
+    </select>
+    <select id="getCommentsum" resultType="User_comment">
+        select * from user_comment
+        where create_time=#{time}
+        and text_id=#{id}
+    </select>
+    <select id="getTextCommentsum" resultType="User_comment">
+        select * from user_comment
+        where text_id=#{id}
+    </select>
+
+
+</mapper>

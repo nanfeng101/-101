@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserCommentMapper">
+    <select id="getUserComment" resultType="User_comment">
+        select * from user_comment,user
+        where text_id=#{id}
+        and user_id=user.id
+    </select>
+    <insert id="addUserComment" parameterType="User_comment">
+        insert into user_comment (text_id,user_id,content,huifu,huifu_huifu,show2,time,show1,create_time) values (#{text_id},#{user_id},#{content},#{huifu},#{huifu_huifu},false,#{time},false,#{create_time})
+    </insert>
+</mapper>

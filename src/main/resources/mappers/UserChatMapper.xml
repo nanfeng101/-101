@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserChatMapper">
+    <select id="getIdUserChat" resultType="User_chat" parameterType="int">
+        select * from user_chat,user
+        where user_id = #{id1}
+        and send_user_id = #{id2}
+        and send_user_id = user.id
+        order by send_time
+    </select>
+<!--    <select id="getChatUser" resultType="User_chat" parameterType="int">-->
+<!--            select distinct send_user_id,username,pic from user,(select * from user_chat-->
+<!--                                                                 where user_id = 1-->
+<!--                                                                 order by send_time desc) as user1-->
+<!--            where user1.send_user_id = user.id-->
+<!--    </select>-->
+    <select id="getChatUser" resultType="User_chat_user">
+        select * from user_chat_user,user
+        where user_id = #{id}
+        and send_user_id = user.id
+        order by user_chat_user.id desc
+    </select>
+    <select id="selectChatUser" parameterType="User_chat_user">
+        select * from user_chat_user,user
+        where user_id = #{id1}
+        and send_user_id = #{id2}
+    </select>
+    <insert id="addChatUser">
+        insert into user_chat_user (user_id,send_user_id) values (#{id1},#{id2})
+    </insert>
+    <select id="selectUser_chat_user" resultType="User_chat_user">
+        select * from user_chat_user
+        where user_id=#{id1}
+        and send_user_id=#{id2}
+    </select>
+    <insert id="addUserChat" parameterType="User_chat">
+        insert into user_chat (user_id,send_user_id,message,ispic,send_time,isread,is_send) values (#{user_id},#{send_user_id},#{message},0,#{send_time},0,#{is_send})
+    </insert>
+<!--    获取用户的未读信息-->
+    <select id="getChatRead" resultType="User_chat" parameterType="int">
+        select * from user_chat
+        where user_id=#{id}
+        and isread=0
+        and is_send=0
+    </select>
+    <select id="getChatUserRead" resultType="User_chat" parameterType="int">
+        select * from user_chat
+        where user_id=#{id1}
+        and send_user_id=#{id2}
+        and isread=0
+        and is_send=0
+    </select>
+    <update id="updateUserRead" parameterType="int">
+        update user_chat set isread=1
+        where user_id=#{id1}
+        and send_user_id=#{id2}
+        and is_send=0
+    </update>
+</mapper>

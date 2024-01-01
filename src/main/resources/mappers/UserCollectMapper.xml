@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserCollectMapper">
+    <select id="selectCollectName" resultType="User_collect_name" parameterType="int">
+        select * from user_collect_name
+        where user_id=#{id}
+    </select>
+    <insert id="addCollect" parameterType="User_collect_name">
+        insert into user_collect_name (user_id,collect_name,collect_miaoshu) values (#{user_id},#{collect_name},#{collect_miaoshu})
+    </insert>
+    <select id="addCollect_text" resultType="User_collect_name">
+        select user_collect_name.id,text_id,user_collect_name.user_id,biaoti from user_collect_name,user_collect,text
+         where collect_name_id = user_collect_name.id
+         and text_id = text.id
+         and user_collect.user_id = #{id}
+         and collect_name = #{name}
+    </select>
+    <update id="updateCollect_name" parameterType="user_collect_name">
+        update user_collect_name
+        <set>
+            <if test="collect_name != null">
+                collect_name = #{collect_name},
+            </if>
+            <if test="collect_miaoshu != null">
+                collect_miaoshu = #{collect_miaoshu},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="selectNameCollect" resultType="User_collect_name" parameterType="String">
+        select id from user_collect_name
+        where collect_name = #{name}
+    </select>
+    <select id="selectMiaoshuCollect" resultType="User_collect_name" parameterType="String">
+        select id from user_collect_name
+        where collect_miaoshu = #{name}
+    </select>
+    <delete id="deleteCollect">
+        delete from user_collect
+        where user_id = #{user_id}
+        and text_id = #{text_id}
+    </delete>
+<!--    用于浏览记录的查询和添加-->
+    <select id="selectIsBrowse" resultType="User_browse" parameterType="int">
+        select * from user_browse
+        where user_id = #{user_id}
+        and text_id = #{text_id}
+    </select>
+    <insert id="addUserBrowse" parameterType="User_browse">
+        insert into user_browse (user_id,text_id,time) values (#{user_id},#{text_id},#{time})
+    </insert>
+    <select id="getUserBrowse" resultType="User_browse" parameterType="User_browse_current">
+        select user_browse.id,user_browse.user_id,user_browse.text_id,user_browse.time,biaoti,text.pic,iscover,username from user_browse,text,user,text_status
+        where user_browse.user_id=#{id}
+        and user_browse.text_id=text.id
+        and user_browse.user_id=user.id
+        and text.id=text_status.text_id
+        order by time desc
+        <if test="act=='byPage'">
+            limit #{current}, #{page}
+        </if>
+    </select>
+    <select id="getBrowserTime" resultType="User_browse" parameterType="User_browse_current">
+        select time from (select time from user_browse
+                          where user_id = 1
+                          limit #{current}, #{page}) user1
+        group by user1.time
+    </select>
+    <update id="updateBrowseTime" parameterType="User_browse">
+        update user_browse set time = #{time}
+        where user_id = #{user_id}
+        and text_id = #{text_id}
+    </update>
+</mapper>

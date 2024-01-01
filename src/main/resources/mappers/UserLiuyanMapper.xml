@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserLiuyanMapper">
+    <select id="getUserLiuyan" resultType="User_liuyan">
+        select * from user_liuyan,user
+        where user_id=user.id
+    </select>
+    <insert id="addUserLiuyan" parameterType="User_liuyan">
+        insert into user_liuyan (user_id,content,time) values (#{user_id},#{content},#{time})
+    </insert>
+    <delete id="deleteLiuyan">
+        delete from user_liuyan
+        where id=#{id}
+    </delete>
+</mapper>

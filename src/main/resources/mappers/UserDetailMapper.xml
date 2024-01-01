@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserDetailMapper">
+    <select id="getAllUser" resultType="User">
+        select * from user
+    </select>
+    <select id="login" resultType="User" parameterType="User">
+        select * from user
+        where password=#{password}
+        and phone=#{phone}
+    </select>
+    <select id="getUser_search_history" resultType="User_search_history">
+        select * from user_search_history
+        where user_id=#{id}
+        order by time desc
+        limit 0,10
+    </select>
+    <insert id="addUser_search_history" parameterType="User_search_history">
+        insert into user_search_history (user_id,content,time) values (#{user_id},#{content},#{time})
+    </insert>
+    <select id="searchaddUser_search_history" resultType="User_search_history" parameterType="User_search_history">
+        select * from user_search_history
+        where user_id=#{user_id}
+        and content=#{content}
+    </select>
+    <delete id="deleteUser_search_history">
+        delete from user_search_history
+        where id=#{id}
+    </delete>
+    <select id="searchUsername" resultType="User">
+        select * from user
+        where username like concat("%",#{username},"%")
+    </select>
+    <update id="updateUserDisable">
+        update user set disable=#{disable}
+        where id=#{id}
+    </update>
+    <select id="selectUserPhone" resultType="User" parameterType="User">
+        select * from user
+        where phone=#{phone}
+    </select>
+    <insert id="register" parameterType="User">
+        insert into user (username,phone,password,create_time,sex,location,introduce,disable) values (#{username},#{phone},#{password},#{create_time},"未填写","未填写","未填写",true)
+    </insert>
+    <insert id="addLoginLocation" parameterType="User_loginlocation">
+        insert into user_loginlocation (user_id,location,time) values (#{user_id},#{location},#{time})
+    </insert>
+    <select id="getLoginLocation" resultType="User_loginlocation" parameterType="int">
+        select * from user_loginlocation
+        where user_id=#{id}
+        order by time desc
+    </select>
+    <select id="getUserDetail" resultType="User" parameterType="int">
+        select * from user
+        where id=#{id}
+    </select>
+    <select id="selectphoneUser" resultType="user" parameterType="String">
+        select * from user
+        where phone=#{phone}
+    </select>
+    <select id="selectemailUser" resultType="user" parameterType="String">
+        select * from user
+        where email=#{email}
+    </select>
+    <update id="updatedetail" parameterType="User">
+        update user
+        <set>
+            <if test="pic != null">
+                pic = #{pic},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce},
+            </if>
+            <if test="location != null">
+                location = #{location},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from user
+        where id=#{id}
+    </delete>
+    <insert id="addCollect_name">
+        insert into user_collect_name (user_id,collect_name,collect_miaoshu) values (#{id},"我的收藏夹","清添加收藏夹描述")
+    </insert>
+    <insert id="addChatUser">
+        insert into user_chat_user (user_id,send_user_id) values (#{id1},5)
+    </insert>
+</mapper>

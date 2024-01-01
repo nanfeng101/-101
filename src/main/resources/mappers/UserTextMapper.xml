@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.UserTextMapper">
+    <select id="getUserIdText" resultType="Text" parameterType="int">
+        select * from text,text_type,text_status
+        where type_id=text_type.id1
+        and id=text_status.text_id
+        and isexamine=1
+        and user_id = #{id}
+    </select>
+    <select id="getUserIdTextDraft" resultType="Text_draft" parameterType="int">
+        select * from text_draft
+        where user_id = #{id}
+    </select>
+    <select id="selectDateText" resultType="Text" parameterType="int">
+        select * from text,text_type,text_status
+        where user_id=#{id}
+        and type_id=text_type.id1
+        and id=text_status.text_id
+        order by create_time desc
+    </select>
+    <select id="selectViewText" resultType="Text" parameterType="int">
+        select * from text,text_type,text_status
+        where user_id=#{id}
+        and type_id=text_type.id1
+        and id=text_status.text_id
+        order by view_sum desc
+    </select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.text.AddTextMapper">
+    <insert id="addTextContent" parameterType="Text">
+        insert into text (content,create_time,user_id,pic,zhaiyao,biaoti,iscover) values (#{content},#{create_time},#{user_id},#{pic},#{zhaiyao},#{biaoti},#{iscover})
+    </insert>
+    <insert id="addTextDraft" parameterType="Text">
+        insert into text_draft (content,user_id,pic,zhaiyao,biaoti,iscover) values (#{content},#{user_id},#{pic},#{zhaiyao},#{biaoti},#{iscover})
+    </insert>
+    <select id="searchTextId" resultType="com.example.demo.enity.SearchId" parameterType="String">
+        select id from text
+        where biaoti=#{biaoti}
+    </select>
+    <insert id="addBioaqian" parameterType="String">
+        insert into biaoqian (name) values (#{name})
+    </insert>
+    <insert id="addTextStatusExamine" >
+        insert into text_status (text_id,isexamine) values (#{id1},#{id2})
+    </insert>
+    <select id="searchBiaoqian" resultType="com.example.demo.enity.SearchBiaqianId" parameterType="String">
+        select id from biaoqian
+        where name=#{name}
+    </select>
+<!--    <select id="searchText_biaoqian" resultType="Text_biaoqian" parameterType="int">-->
+<!--        select * from text_biaoqian-->
+<!--        where text_id=#{id1}-->
+<!--        and biaoqian_id=#{id2}-->
+<!--    </select>-->
+<!--    <update id="updateText_biaoqian" parameterType="int">-->
+<!--        update text_biaoqian set biaoqian_id=#{id1}-->
+<!--        where id=#{id2}-->
+<!--    </update>-->
+    <insert id="addText_biaoqian" parameterType="int">
+        insert into text_biaoqian (text_id,biaoqian_id) values (#{id1},#{id2})
+    </insert>
+    <insert id="addtype" parameterType="String">
+        insert into text_type (type) values (#{type})
+    </insert>
+    <select id="searchtype" resultType="Text_type" parameterType="String">
+        select id1 from text_type
+        where type=#{type}
+    </select>
+    <update id="updateType" parameterType="int">
+        update text set type_id = #{id1}
+        where id = #{id2}
+    </update>
+    <select id="selectTextDraft" resultType="Text_draft">
+        select * from text_draft
+        where biaoti=#{biaoti}
+    </select>
+    <delete id="deleteTextDraft" >
+        delete from text_draft
+        where id=#{id}
+    </delete>
+</mapper>

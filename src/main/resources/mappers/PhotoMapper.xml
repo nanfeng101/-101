@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.user.PjotoMapper">
+    <select id="getPhoto" resultType="Photo">
+        select * from photo,user
+        where user_id=user.id
+    </select>
+    <insert id="addPhoto" parameterType="Photo">
+        insert into photo (user_id,content,pic1,time) values (#{user_id},#{content},#{pic1},#{time})
+    </insert>
+    <delete id="deletePhoto">
+        delete from photo
+        where id=#{id}
+    </delete>
+</mapper>

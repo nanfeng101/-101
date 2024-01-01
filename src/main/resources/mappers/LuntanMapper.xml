@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.luntan.LuntanMapper">
+    <select id="getLuntanText" resultType="Luntan">
+        select * from luntan,user
+        where user_id=user.id
+        order by luntan.create_time desc
+    </select>
+    <select id="getUserIdLuntanText" resultType="Luntan">
+        select * from luntan,user
+        where user_id=#{id}
+        and user_id=user.id
+        order by luntan.create_time desc
+    </select>
+    <insert id="addLuntanText" parameterType="Luntan">
+        insert into luntan (user_id,avatar,biaoti,content,is_cover,create_time) values (#{user_id},#{avatar},#{biaoti},#{content},#{is_cover},#{create_time})
+    </insert>
+</mapper>
