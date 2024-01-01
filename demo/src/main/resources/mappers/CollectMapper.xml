@@ -36,4 +36,18 @@
         where singer_id = #{id2}
         and user_id = #{id1}
     </select>
+    <select id="getAndroidUserCollectMusic" resultType="Bangdan" parameterType="int">
+        select * from collect,song
+        where user_id = #{id1}
+        and collect.song_id=song.id
+    </select>
+    <select id="getAndroidUserCreateSongList" resultType="Song_list" parameterType="int">
+        select * from song_list,collect
+        where user_id = #{id1}
+        and song_list.id = collect.song_list_id
+    </select>
+    <select id="selectAndroidUserId" resultType="Consumer" parameterType="String">
+        select * from consumer
+        where phone_num=#{str}
+    </select>
 </mapper>

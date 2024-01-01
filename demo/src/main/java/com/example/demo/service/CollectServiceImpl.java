@@ -1,10 +1,14 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Bangdan;
+import com.example.demo.entity.Consumer;
+import com.example.demo.entity.Song_list;
 import com.example.demo.mapper.CollectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -64,5 +68,36 @@ public class CollectServiceImpl implements CollectService{
         }else {
             return "no";
         }
+    }
+
+    //安卓调用方法
+    //获取用户创建歌单
+    public List<Song_list> getAndroidUserCreateSongList(String phone){
+        Consumer consumer = collectMapper.selectAndroidUserId(phone);
+        return collectMapper.getAndroidUserCreateSongList(consumer.getId());
+    }
+    public List<Bangdan> getAndroidUserCollectMusic(String phone){
+        Consumer consumer = collectMapper.selectAndroidUserId(phone);
+        List<Bangdan> list = collectMapper.getAndroidUserCollectMusic(consumer.getId());
+        for(Bangdan item:list){
+            String name1=item.getName();
+            char[] name2=name1.toCharArray();
+            String name3="";
+            String name4="";
+            int m=0;
+            for(int i=0;i<name2.length;i++){
+                if(name2[i]=='-'){
+                    m=i;
+                    break;
+                }
+                name3=name3+name2[i];
+            }
+            item.setSinger_name(name3);
+            for(int j=m+1;j<name2.length;j++){
+                name4=name4+name2[j];
+            }
+            item.setName(name4);
+        }
+        return list;
     }
 }

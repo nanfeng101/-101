@@ -16,4 +16,7 @@ public interface CollectMapper {
     Collect isMvExit(int id1,int id2);
     Collect isSong_listExit(int id1,int id2);
     Collect isSingerExit(int id1,int id2);
+    List<Song_list> getAndroidUserCreateSongList(int id1);
+    Consumer selectAndroidUserId(String str);
+    List<Bangdan> getAndroidUserCollectMusic(int id1);
 }
