@@ -20,6 +20,8 @@ public class Bangdan {
     private String singer_name;
     private MediaPlayer mediaPlayer;
     private List<LrcBean> lrcBeanList;
+    private int user_id;
+    private int sum;
 
     public int getId1() {
         return id1;
@@ -123,5 +125,21 @@ public class Bangdan {
 
     public void setLrcBeanList(List<LrcBean> lrcBeanList) {
         this.lrcBeanList = lrcBeanList;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 }

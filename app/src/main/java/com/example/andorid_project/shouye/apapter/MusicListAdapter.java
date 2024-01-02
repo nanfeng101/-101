@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.andorid_project.dao.shouye.MusicDao;
 import com.example.andorid_project.shouye.Fragement.MusicListFragement;
 import com.example.andorid_project.shouye.ShouyeActivity;
 import com.example.andorid_project.shouye.geci.geciActivity;
@@ -138,6 +139,8 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
                             }
                         }, 500, 1000);
                     }
+                    MusicDao musicDao1 = new MusicDao();
+                    musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getId()));
                 }
             });
         }

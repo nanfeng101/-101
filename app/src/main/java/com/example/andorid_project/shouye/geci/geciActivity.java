@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.andorid_project.Activity.BaseViewActivity;
 import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
+import com.example.andorid_project.dao.shouye.MusicDao;
 import com.example.andorid_project.shouye.Fragement.MusicListFragement;
 import com.example.andorid_project.shouye.ShouyeActivity;
 import com.example.andorid_project.until.TengxunPreferenceUtil;
@@ -230,6 +231,8 @@ public class geciActivity extends BaseViewActivity {
                 geci_second.setText(lrcBeanList.get(1).getText());
                 seekBar.setMax(ShouyeActivity.mediaPlayer.getDuration()/1000);
                 geci_play.setImageResource(R.drawable.pause_white);
+                MusicDao musicDao1 = new MusicDao();
+                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getId()));
             }
         });
         //歌词页面下一首监听事件
@@ -283,6 +286,8 @@ public class geciActivity extends BaseViewActivity {
                 }
                 seekBar.setMax(ShouyeActivity.mediaPlayer.getDuration()/1000);
                 geci_play.setImageResource(R.drawable.pause_white);
+                MusicDao musicDao1 = new MusicDao();
+                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getId()));
             }
         });
 

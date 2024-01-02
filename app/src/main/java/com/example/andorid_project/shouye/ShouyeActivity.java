@@ -43,6 +43,7 @@ import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
 import com.example.andorid_project.dao.collect.MusicCollectDao;
 import com.example.andorid_project.dao.shouye.MusicDao;
+import com.example.andorid_project.myself.MyHomeActivity;
 import com.example.andorid_project.shouye.Fragement.MusicListFragement;
 import com.example.andorid_project.shouye.apapter.DrawerAdapater;
 import com.example.andorid_project.shouye.enity.Bangdan;
@@ -99,6 +100,7 @@ public class ShouyeActivity extends BaseViewActivity {
     public static ImageView drawer_touciang;
     public static TextView drawer_username;
     public static List<Bangdan> collectList;
+    public static List<Bangdan> music_listen_list;
     public Context getContext(){
         return mContext;
     }
@@ -188,6 +190,36 @@ public class ShouyeActivity extends BaseViewActivity {
             }
         }, 1000);
 
+
+        //提前加载我的页面需要的数据
+        MusicDao musicDao1 = new MusicDao();
+        musicDao1.get_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String str=musicDao1.music_listen;
+                Bangdan bangdan = new Bangdan();
+                List<Bangdan> list = new ArrayList<>();
+                Gson gson = new Gson();
+                try {
+                    JSONArray jsonArray = new JSONArray(str);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+                        bangdan=gson.fromJson(String.valueOf(jsonObject1),Bangdan.class);
+                        if(bangdan.getLyric()!=null){
+                            List<LrcBean> lrcBean = PraseLrc.jiexi(bangdan.getLyric());
+                            bangdan.setLrcBeanList(lrcBean);
+                        }
+                        list.add(bangdan);
+                    }
+                    music_listen_list=list;
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        },1000);
+
     }
 
     @Override
@@ -269,6 +301,8 @@ public class ShouyeActivity extends BaseViewActivity {
                 geciActivity.geci_biaoti.setText(bangdanList.get(musicId).getName());
                 geciActivity.geci_biaoti.setText(bangdanList.get(musicId).getSinger_name());
                 geciActivity.lrcBeanList = bangdanList.get(musicId).getLrcBeanList();
+                MusicDao musicDao1 = new MusicDao();
+                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(bangdanList.get(musicId).getId()));
             }
         });
         //首页下一首监听事件
@@ -279,6 +313,8 @@ public class ShouyeActivity extends BaseViewActivity {
                 tengxunPreferenceUtil.setPlayMusic(false);
                 music_play.setImageResource(R.drawable.pause);
                 next();
+                MusicDao musicDao1 = new MusicDao();
+                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(bangdanList.get(musicId).getId()));
             }
         });
         //歌曲列表按钮监听事件
@@ -321,6 +357,8 @@ public class ShouyeActivity extends BaseViewActivity {
             public void onClick(View v) {
                 if(tengxunPreferenceUtil.isUserLogin()){
                     Log.d(TAG, "onClick: 进入用户界面");
+                    Intent intent = new Intent(ShouyeActivity.this, MyHomeActivity.class);
+                    startActivity(intent);
                 }else{
                     Log.d(TAG, "onClick: 进入登录界面");
                     Intent intent = new Intent(ShouyeActivity.this, LoginActivity.class);
@@ -334,6 +372,8 @@ public class ShouyeActivity extends BaseViewActivity {
             public void onClick(View v) {
                 if(tengxunPreferenceUtil.isUserLogin()){
                     Log.d(TAG, "onClick: 进入用户界面");
+                    Intent intent = new Intent(ShouyeActivity.this, MyHomeActivity.class);
+                    startActivity(intent);
                 }else{
                     Log.d(TAG, "onClick: 进入登录界面");
                     Intent intent = new Intent(ShouyeActivity.this, LoginActivity.class);
@@ -365,9 +405,8 @@ public class ShouyeActivity extends BaseViewActivity {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                System.out.println(bangdanList.get(0).getName());
             }
-        },3000);
+        },2000);
 
 
     }

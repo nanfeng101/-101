@@ -35,6 +35,7 @@ import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
 import com.example.andorid_project.dao.collect.MusicCollectDao;
 import com.example.andorid_project.dao.collect.Song_list_CollectDao;
+import com.example.andorid_project.myself.MyHomeActivity;
 import com.example.andorid_project.myself.MySelfActivity;
 import com.example.andorid_project.myself.adapater.MyselfGedanAdapater;
 import com.example.andorid_project.shouye.ShouyeActivity;
@@ -144,6 +145,8 @@ public class TabFragement extends Fragment{
                 public void onClick(View v) {
                     if(tengxunPreferenceUtil1.isUserLogin()){
                         Log.d(TAG, "onClick: 进入用户界面");
+                        Intent intent = new Intent(mContext, MyHomeActivity.class);
+                        startActivity(intent);
                     }else{
                         Log.d(TAG, "onClick: 进入登录界面");
                         Intent intent = new Intent(mContext, LoginActivity.class);
@@ -156,6 +159,8 @@ public class TabFragement extends Fragment{
                 public void onClick(View v) {
                     if(tengxunPreferenceUtil1.isUserLogin()){
                         Log.d(TAG, "onClick: 进入用户界面");
+                        Intent intent = new Intent(mContext, MyHomeActivity.class);
+                        startActivity(intent);
                     }else{
                         Log.d(TAG, "onClick: 进入登录界面");
                         Intent intent = new Intent(mContext, LoginActivity.class);

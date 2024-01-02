@@ -9,10 +9,13 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.andorid_project.Activity.BaseViewActivity;
 import com.example.andorid_project.R;
+import com.example.andorid_project.config.Quanju;
 import com.example.andorid_project.dao.collect.Song_list_CollectDao;
 import com.example.andorid_project.dao.shouye.MusicDao;
 import com.example.andorid_project.dao.shouye.Song_listDao;
@@ -24,6 +27,7 @@ import com.example.andorid_project.shouye.geci.LrcBean;
 import com.example.andorid_project.shouye.geci.PraseLrc;
 import com.example.andorid_project.shouye.song_list.Song_listActivity;
 import com.example.andorid_project.shouye.song_list.Song_listAdapater;
+import com.example.andorid_project.until.TengxunPreferenceUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -39,6 +43,7 @@ public class MySelfActivity extends BaseViewActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_self);
     }
+
 
 
 }

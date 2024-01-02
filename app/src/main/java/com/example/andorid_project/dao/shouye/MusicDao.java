@@ -43,6 +43,7 @@ public class MusicDao {
     public static List<Song_list> songLists;
     public static List<Bangdan> bangdans;
     public static String data;
+    public String music_listen;
     public void acquireSong_list(String size){
         OkHttpClient httpClient = new OkHttpClient();
 //        Map<String,String> map = new HashMap<>();
@@ -119,6 +120,42 @@ public class MusicDao {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
+            }
+        });
+    }
+    public void add_Musci_listen_sum(String phone,String id){
+        OkHttpClient httpClient = new OkHttpClient();
+        FormBody formBody = new FormBody.Builder().add("phone",phone).add("id2",id).build();
+        String url=Quanju.url1+"addMusic_listen_sum";
+        final Request request = new Request.Builder().url(url).post(formBody).build();
+        Call call=httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+            }
+        });
+    }
+    public void get_Musci_listen_sum(String phone){
+        OkHttpClient httpClient = new OkHttpClient();
+        FormBody formBody = new FormBody.Builder().add("phone",phone).build();
+        String url=Quanju.url1+"getMusic_Listen_sum";
+        final Request request = new Request.Builder().url(url).post(formBody).build();
+        Call call=httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                music_listen = response.body().string();
             }
         });
     }
