@@ -87,54 +87,7 @@ public class Song_listAdapater extends RecyclerView.Adapter<Song_listAdapater.Vi
                 public void onClick(View v) {
                     Log.d(TAG, "onClick: 歌曲已经被点击");
                     ShouyeActivity.bangdanList.addAll(list1);
-                    System.out.println(id);
-                    ShouyeActivity.musicId=id;
-                    if(geciActivity.timer!=null){
-                        geciActivity.timer.cancel();
-                    }
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    try {
-                        mediaPlayer.setDataSource(Quanju.url1 + item.getUrl());
-                        mediaPlayer.prepare();
-                        ShouyeActivity.mediaPlayer=mediaPlayer;
-                        ShouyeActivity.mediaPlayer.start();
-                    }
-                    catch (IOException e){
-
-                    }
-                    Glide.with(context1).load(Quanju.url1+item.getPic()).into(ShouyeActivity.qia);
-                    ShouyeActivity.shouye_zhuzhe.setText(item.getName());
-                    if(geciActivity.geci_biaoti!=null) {
-                        geciActivity.geci_biaoti.setText(item.getName());
-                        geciActivity.geci_zhuozhe.setText(item.getSinger_name());
-                        geciActivity.lrcBeanList = item.getLrcBeanList();
-                    }
-                    TengxunPreferenceUtil tengxunPreferenceUtil = new TengxunPreferenceUtil();
-                    tengxunPreferenceUtil.setPlayMusic(false);
-                    ShouyeActivity.music_play.setImageResource(R.drawable.pause);
-                    if(geciActivity.timer!=null) {
-                        Timer timer = new Timer();
-                        try {
-                            geciActivity.timer = timer;
-                            geciActivity.timer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    int time;
-                                    try {
-                                        time = ShouyeActivity.mediaPlayer.getCurrentPosition();
-                                    } catch (Exception e) {
-                                        time = 0;
-                                    }
-                                    Message message = Message.obtain();
-                                    message.arg1 = time;
-                                    geciActivity.handler.sendMessage(message);
-
-                                }
-                            }, 200, 1000);
-                        } catch (Exception e) {
-
-                        }
-                    }
+                    Quanju.PlayMusic(context1,item,id);
                 }
             });
         }

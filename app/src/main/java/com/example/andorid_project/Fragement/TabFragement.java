@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import com.example.andorid_project.config.Quanju;
 import com.example.andorid_project.dao.collect.MusicCollectDao;
 import com.example.andorid_project.dao.collect.Song_list_CollectDao;
 import com.example.andorid_project.myself.MyHomeActivity;
+import com.example.andorid_project.myself.MyMusicCollectActivity;
 import com.example.andorid_project.myself.MySelfActivity;
 import com.example.andorid_project.myself.adapater.MyselfGedanAdapater;
 import com.example.andorid_project.shouye.ShouyeActivity;
@@ -206,6 +208,16 @@ public class TabFragement extends Fragment{
                     }
                 }, 1000);
             }
+            LinearLayout myself_layout=(LinearLayout) v.findViewById(R.id.myself_linearlayout);
+            myself_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(tengxunPreferenceUtil1.isUserLogin()){
+                        Intent intent = new Intent(mContext, MyMusicCollectActivity.class);
+                        startActivity(intent);
+                    }
+                }
+            });
         }
         else{
             v = inflater.inflate(R.layout.mv ,null);

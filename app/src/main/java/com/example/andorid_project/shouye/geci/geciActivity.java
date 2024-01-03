@@ -50,6 +50,7 @@ public class geciActivity extends BaseViewActivity {
     public static ImageView geci_play;
     public static Timer timer;
     public static ImageView geci_music_pic;
+    public FrameLayout overlay;
     public static Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -124,10 +125,10 @@ public class geciActivity extends BaseViewActivity {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    int time = ShouyeActivity.mediaPlayer.getCurrentPosition();
-                    Message message = Message.obtain();
-                    message.arg1 = time;
-                    geciActivity.handler.sendMessage(message);
+                int time = ShouyeActivity.mediaPlayer.getCurrentPosition();
+                Message message = Message.obtain();
+                message.arg1 = time;
+                geciActivity.handler.sendMessage(message);
 
                 }
             }, 200, 1000);
@@ -193,46 +194,7 @@ public class geciActivity extends BaseViewActivity {
                     ShouyeActivity.musicId=ShouyeActivity.bangdanList.size();
                 }
                 ShouyeActivity.musicId--;
-                timer.cancel();
-                try {
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(Quanju.url1+ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getUrl());
-                    mediaPlayer.prepare();
-                    ShouyeActivity.mediaPlayer = mediaPlayer;
-                    ShouyeActivity.mediaPlayer.start();
-                }catch (IOException e){
-                    Log.d(TAG, ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getName());
-                }
-                Timer timer1 = new Timer();
-                timer=timer1;
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        int time;
-                        try {
-                            time = ShouyeActivity.mediaPlayer.getCurrentPosition();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            time=0;
-                        }
-                        Message message = Message.obtain();
-                        message.arg1 = time;
-                        geciActivity.handler.sendMessage(message);
-
-                    }
-                },500,1000);
-                Glide.with(geciActivity.this).load(Quanju.url1+ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getPic()).into(geci_music_pic);
-                geci_biaoti.setText(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getName());
-//                ShouyeActivity.qia.setImageResource(ShouyeActivity.musicXinxi.get(ShouyeActivity.musicId).getPic());
-                geci_zhuozhe.setText(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getSinger_name());
-                ShouyeActivity.shouye_zhuzhe.setText(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getName());
-                lrcBeanList = ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getLrcBeanList();
-                geci_first.setText(lrcBeanList.get(0).getText());
-                geci_second.setText(lrcBeanList.get(1).getText());
-                seekBar.setMax(ShouyeActivity.mediaPlayer.getDuration()/1000);
-                geci_play.setImageResource(R.drawable.pause_white);
-                MusicDao musicDao1 = new MusicDao();
-                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getId()));
+                Quanju.PlayMusic(geciActivity.this,ShouyeActivity.bangdanList.get(ShouyeActivity.musicId),ShouyeActivity.musicId);
             }
         });
         //歌词页面下一首监听事件
@@ -246,48 +208,25 @@ public class geciActivity extends BaseViewActivity {
                     ShouyeActivity.musicId=-1;
                 }
                 ShouyeActivity.musicId++;
-                timer.cancel();
-                try {
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(Quanju.url1+ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getUrl());
-                    mediaPlayer.prepare();
-                    ShouyeActivity.mediaPlayer = mediaPlayer;
-                    ShouyeActivity.mediaPlayer.start();
-                }catch (Exception e){
-                    Log.d(TAG, ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getName());
-                }
-                Timer timer1 = new Timer();
-                timer=timer1;
-                timer.schedule(new TimerTask() {
+                Quanju.PlayMusic(geciActivity.this,ShouyeActivity.bangdanList.get(ShouyeActivity.musicId),ShouyeActivity.musicId);
+            }
+        });
+        //歌曲列表按钮监听事件
+        ImageView music_list = findViewById(R.id.geci_play_list);
+        music_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overlay = findViewById(R.id.geci_overlay);
+                overlay.setBackgroundColor(Color.BLACK); // 设置蒙版颜色为黑色，可以根据需要调整
+                overlay.setAlpha((float) 0.5); // 设置初始透明度为0
+                MusicListFragement musicListFragement = new MusicListFragement(geciActivity.this,overlay);
+                musicListFragement.show(getSupportFragmentManager(),new View.OnClickListener() {
                     @Override
-                    public void run() {
-                        int time;
-                        try {
-                            time = ShouyeActivity.mediaPlayer.getCurrentPosition();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            time=0;
-                        }
-                        Message message = Message.obtain();
-                        message.arg1 = time;
-                        geciActivity.handler.sendMessage(message);
-
+                    //打印一个按钮点击日志
+                    public void onClick(View v) {
+                        Log.d("MainActivity","primary onClick");
                     }
-                },200,1000);
-                Glide.with(geciActivity.this).load(Quanju.url1+ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getPic()).into(geci_music_pic);
-                geci_biaoti.setText(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getName());
-//                ShouyeActivity.qia.setImageResource(ShouyeActivity.musicXinxi.get(ShouyeActivity.musicId).getPic());
-                geci_zhuozhe.setText(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getSinger_name());
-                ShouyeActivity.shouye_zhuzhe.setText(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getName());
-                lrcBeanList = ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getLrcBeanList();
-                if(lrcBeanList.size()!=0) {
-                    geci_first.setText(lrcBeanList.get(0).getText());
-                    geci_second.setText(lrcBeanList.get(0).getText());
-                }
-                seekBar.setMax(ShouyeActivity.mediaPlayer.getDuration()/1000);
-                geci_play.setImageResource(R.drawable.pause_white);
-                MusicDao musicDao1 = new MusicDao();
-                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getId()));
+                },geciActivity.this,overlay);
             }
         });
 

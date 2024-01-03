@@ -95,52 +95,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(geciActivity.timer!=null){
-                        geciActivity.timer.cancel();
-                    }
-                    TengxunPreferenceUtil tengxunPreferenceUtil = new TengxunPreferenceUtil();
-                    try{
-                        ShouyeActivity.mediaPlayer.release();
-                        MediaPlayer mediaPlayer1 = new MediaPlayer();
-                        mediaPlayer1.setDataSource(Quanju.url1+item.getUrl());
-                        mediaPlayer1.prepare();
-                        ShouyeActivity.mediaPlayer=mediaPlayer1;
-                        ShouyeActivity.mediaPlayer.start();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-                    ShouyeActivity.shouye_zhuzhe.setText(item.getName());
-                    Glide.with(context1).load(Quanju.url1+item.getPic()).into(ShouyeActivity.qia);
-                    ShouyeActivity.music_play.setImageResource(R.drawable.pause);
-                    ShouyeActivity.musicId=id;
-                    if(geciActivity.geci_biaoti!=null) {
-                        geciActivity.geci_play.setImageResource(R.drawable.pause_white);
-                        geciActivity.geci_biaoti.setText(item.getName());
-                        geciActivity.geci_zhuozhe.setText(item.getSinger_name());
-                        geciActivity.lrcBeanList = item.getLrcBeanList();
-                    }
-                    tengxunPreferenceUtil.setPlayMusic(false);
-                    if(tengxunPreferenceUtil.isPlayGEci()) {
-                        Timer timer1 = new Timer();
-                        geciActivity.timer = timer1;
-                        geciActivity.timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                int time;
-                                try {
-                                    time = ShouyeActivity.mediaPlayer.getCurrentPosition();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    time = 0;
-                                }
-                                Message message = Message.obtain();
-                                message.arg1 = time;
-                                geciActivity.handler.sendMessage(message);
-                            }
-                        }, 500, 1000);
-                    }
-                    MusicDao musicDao1 = new MusicDao();
-                    musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(ShouyeActivity.bangdanList.get(ShouyeActivity.musicId).getId()));
+                    Quanju.PlayMusic(context1,item,id);
                 }
             });
         }

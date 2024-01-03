@@ -208,6 +208,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/myslef_layout"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="350dp"

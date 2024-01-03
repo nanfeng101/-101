@@ -24,6 +24,12 @@
         android:theme="@style/Theme.Andorid_project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".myself.MyMusicCollectActivity"
+            android:exported="true" />
+        <activity
+            android:name=".myself.ListenMusicRangActivity"
+            android:exported="true" />
+        <activity
             android:name=".myself.MyHomeActivity"
             android:exported="true" />
         <activity
@@ -37,20 +43,16 @@
             android:exported="true" />
         <activity
             android:name=".shouye.geci.geciActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".shouye.ShouyeActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".LoginOrRegister.LoginActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".Guide.GuideActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

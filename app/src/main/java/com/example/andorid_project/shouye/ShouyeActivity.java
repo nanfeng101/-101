@@ -113,6 +113,7 @@ public class ShouyeActivity extends BaseViewActivity {
 
     @Override
     protected void initDatum() {
+        super.initDatum();
         TengxunPreferenceUtil tengxunPreferenceUtil1 = new TengxunPreferenceUtil();
         drawer_touciang = findViewById(R.id.shouye_touxiang_login);
         drawer_username = findViewById(R.id.shouye_wenzi_login);
@@ -124,8 +125,6 @@ public class ShouyeActivity extends BaseViewActivity {
             drawer_touciang.setImageResource(R.drawable.wei_login);
             drawer_username.setText("立即登录");
         }
-
-        super.initDatum();
         musicXinxi = CheshiData.add();
         qia = findViewById(R.id.qianwang);
         qia.setImageResource(musicXinxi.get(musicId).getPic());
@@ -271,38 +270,7 @@ public class ShouyeActivity extends BaseViewActivity {
                     musicId=0;
                 }
                 musicId++;
-                try {
-                    if(geciActivity.timer!=null) {
-                        geciActivity.timer.cancel();
-                    }
-                    MediaPlayer mediaPlayer1 = new MediaPlayer();
-                    mediaPlayer.setDataSource(Quanju.url1+bangdanList.get(musicId).getUrl());
-                    mediaPlayer.prepare();
-                    mediaPlayer = mediaPlayer1;
-                    mediaPlayer.start();
-                    if(tengxunPreferenceUtil.isPlayGEci()) {
-                        Timer timer1 = new Timer();
-                        geciActivity.timer = timer1;
-                        geciActivity.timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                int time = ShouyeActivity.mediaPlayer.getCurrentPosition();
-                                Message message = Message.obtain();
-                                message.arg1 = time;
-                                geciActivity.handler.sendMessage(message);
-                            }
-                        }, 500, 1000);
-                    }
-                }catch(Exception e){
-                    Log.d(TAG, bangdanList.get(musicId).getName());
-                }
-                Glide.with(ShouyeActivity.this).load(Quanju.url1+bangdanList.get(musicId).getPic()).into(qia);
-                shouye_zhuzhe.setText(bangdanList.get(musicId).getName());
-                geciActivity.geci_biaoti.setText(bangdanList.get(musicId).getName());
-                geciActivity.geci_biaoti.setText(bangdanList.get(musicId).getSinger_name());
-                geciActivity.lrcBeanList = bangdanList.get(musicId).getLrcBeanList();
-                MusicDao musicDao1 = new MusicDao();
-                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(bangdanList.get(musicId).getId()));
+                Quanju.PlayMusic(ShouyeActivity.this,bangdanList.get(musicId),musicId);
             }
         });
         //首页下一首监听事件
@@ -310,11 +278,13 @@ public class ShouyeActivity extends BaseViewActivity {
         shouye_next_music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tengxunPreferenceUtil.setPlayMusic(false);
-                music_play.setImageResource(R.drawable.pause);
-                next();
-                MusicDao musicDao1 = new MusicDao();
-                musicDao1.add_Musci_listen_sum(tengxunPreferenceUtil.getUserPhone(),Integer.toString(bangdanList.get(musicId).getId()));
+                mediaPlayer.release();
+                if(musicId>=bangdanList.size()-1){
+                    musicId=-1;
+                }
+                musicId++;
+                Quanju.PlayMusic(ShouyeActivity.this,bangdanList.get(musicId),musicId);
+
             }
         });
         //歌曲列表按钮监听事件
@@ -409,47 +379,6 @@ public class ShouyeActivity extends BaseViewActivity {
         },2000);
 
 
-    }
-    public void next(){
-        mediaPlayer.release();
-        if(musicId>=bangdanList.size()-1){
-            musicId=-1;
-        }
-        musicId++;
-        try {
-            if(geciActivity.timer!=null) {
-                geciActivity.timer.cancel();
-            }
-            TengxunPreferenceUtil tengxunPreferenceUtil = new TengxunPreferenceUtil();
-            MediaPlayer mediaPlayer1 = new MediaPlayer();
-            mediaPlayer1.setDataSource(Quanju.url1+bangdanList.get(musicId).getUrl());
-            mediaPlayer1.prepare();
-            mediaPlayer = mediaPlayer1;
-            mediaPlayer.start();
-            if(tengxunPreferenceUtil.isPlayGEci()) {
-                Timer timer1 = new Timer();
-                geciActivity.timer = timer1;
-                geciActivity.timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        int time;
-                        try {
-                            time = mediaPlayer.getCurrentPosition();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            time = 0;
-                        }
-                        Message message = Message.obtain();
-                        message.arg1 = time;
-                        geciActivity.handler.sendMessage(message);
-                    }
-                }, 500, 1000);
-            }
-        }catch(IOException e){
-            Log.d(TAG, bangdanList.get(musicId).getName());
-        }
-        Glide.with(this).load(Quanju.url1+bangdanList.get(musicId).getPic()).into(qia);
-        shouye_zhuzhe.setText(bangdanList.get(musicId).getName());
     }
 
     private void tl_2() {

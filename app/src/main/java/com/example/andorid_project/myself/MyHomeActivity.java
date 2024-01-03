@@ -2,11 +2,13 @@ package com.example.andorid_project.myself;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +68,9 @@ public class MyHomeActivity extends BaseViewActivity {
             tongpai_name.setText(list.get(2).getName());
             tongpai_singer.setText(list.get(2).getSinger_name());
             Glide.with(MyHomeActivity.this).load(Quanju.url1+list.get(2).getPic()).into(tongpai_pic);
+            TextView myself_collect_musicsum = findViewById(R.id.myself_collect_musicsum);
+            String sum = "共"+Integer.toString(ShouyeActivity.collectList.size())+"首";
+            myself_collect_musicsum.setText(sum);
         }
     }
 
@@ -77,6 +82,22 @@ public class MyHomeActivity extends BaseViewActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        LinearLayout layout = findViewById(R.id.myhome_music_listen);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyHomeActivity.this,ListenMusicRangActivity.class);
+                startActivity(intent);
+            }
+        });
+        LinearLayout myhome_layout = findViewById(R.id.myhome_layout);
+        myhome_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyHomeActivity.this,MyMusicCollectActivity.class);
+                startActivity(intent);
             }
         });
     }
