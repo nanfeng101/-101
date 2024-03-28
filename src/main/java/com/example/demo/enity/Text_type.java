@@ -1,5 +1,8 @@
 package com.example.demo.enity;
 
+import lombok.Data;
+
+@Data
 public class Text_type {
     private int id1;
     private String type;

@@ -2,7 +2,6 @@ package com.example.demo.controller.text;
 
 import com.example.demo.enity.Text;
 import com.example.demo.service.text.AddTextService;
-import com.example.demo.vo.FormData;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

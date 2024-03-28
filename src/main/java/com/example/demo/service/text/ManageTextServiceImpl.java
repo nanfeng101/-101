@@ -1,5 +1,6 @@
 package com.example.demo.service.text;
 
+import cn.hutool.json.JSONUtil;
 import com.example.demo.dao.text.AddTextMapper;
 import com.example.demo.dao.text.ManageTextMapper;
 import com.example.demo.dao.user.UserDetailMapper;
@@ -7,13 +8,20 @@ import com.example.demo.enity.Text;
 import com.example.demo.enity.Text_biaoqian;
 import com.example.demo.enity.User;
 import com.example.demo.vo.BiaoqianVo;
+import com.github.xiaoymin.knife4j.core.util.StrUtil;
+import nonapi.io.github.classgraph.json.JSONUtils;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import static com.example.demo.utils.RedisConstes.*;
 
 @Service
 public class ManageTextServiceImpl implements ManageTextService{
@@ -23,9 +31,19 @@ public class ManageTextServiceImpl implements ManageTextService{
     private UserDetailMapper userDetailMapper;
     @Resource
     private AddTextMapper addTextMapper;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
     //获取所有文章的信息
     public Map<String,Object> getAllTextDetail(){
         Map<String,Object> map1 = new HashMap<String,Object>();
+        String key = TEXT_ALL_KEY;
+        String detail = stringRedisTemplate.opsForValue().get(key);
+        if(StrUtil.isNotBlank(detail)){
+            return JSONUtil.parseObj(detail);
+        }
+        if(detail!=null){
+            return null;
+        }
         List<Text> list = manageTextMapper.getAllTextDetail();
         List<BiaoqianVo> arratlist = new ArrayList<BiaoqianVo>();
         int view=0;
@@ -53,18 +71,28 @@ public class ManageTextServiceImpl implements ManageTextService{
         map1.put("biaoqian",arratlist);
         map1.put("text_sum",manageTextMapper.getAllTextDetail().size());
         map1.put("view_sum",view);
+        stringRedisTemplate.opsForValue().set(key,JSONUtil.toJsonStr(map1),TIME_MINUTES, TimeUnit.MINUTES);
         return map1;
     }
     //获取指定文章的标签
     public List<String> getTextBiaoqian(int id){
+        String key = TEXT_BIAOQIAN_KEY;
+        String detail = stringRedisTemplate.opsForValue().get(key);
+        if(StrUtil.isNotBlank(detail)){
+            return JSONUtil.toList(detail,String.class);
+        }
+        if(detail!=null){
+            return null;
+        }
         List<Text_biaoqian> list = manageTextMapper.getTextBiaoqian(id);
         List<String> list1 = new ArrayList<String>();
         for(Text_biaoqian item:list){
             list1.add(item.getName());
         }
+        stringRedisTemplate.opsForValue().set(key,JSONUtil.toJsonStr(list1),TIME_MINUTES,TimeUnit.MINUTES);
         return list1;
     }
-    @Cacheable(value = "hottext" , key = "'getHottext'")
+//    @Cacheable(value = "hottext" , key = "'getHottext'")
     //获取热门文章
     public List<Text> getHottext(){
         List<Text> list = manageTextMapper.getHottext();
@@ -90,10 +118,19 @@ public class ManageTextServiceImpl implements ManageTextService{
         }
     }
     //根据文章id获取文章信息
+    @Transactional
     public Text selectIdText(int id){
+        String key = TEXT_DETAIL_KEY+id;
+        String detail = stringRedisTemplate.opsForValue().get(key);
+        if(StrUtil.isNotBlank(detail)){
+            return JSONUtil.toBean(detail,Text.class);
+        }
+        if(detail!=null){
+            return null;
+        }
         Text text = manageTextMapper.selectIdText(id);
         User user = userDetailMapper.getUserDetail(text.getUser_id());
-        if(text.getIscover()){
+        if(text.isIscover()){
             text.setIscover1(1);
         }
         else{
@@ -105,6 +142,7 @@ public class ManageTextServiceImpl implements ManageTextService{
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String birth1=dateFormat.format(birth);
         text.setCreate_time1(birth1);
+        stringRedisTemplate.opsForValue().set(key,JSONUtil.toJsonStr(text),TIME_MINUTES,TimeUnit.MINUTES);
         return text;
     }
 }

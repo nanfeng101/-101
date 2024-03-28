@@ -1,5 +1,8 @@
 package com.example.demo.enity;
 
+import lombok.Data;
+
+@Data
 public class User_fensi_data {
     private String name;
     private int value;

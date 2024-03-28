@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
 @RestController
 public class UserDetailController {
     @Resource
@@ -121,13 +120,13 @@ public class UserDetailController {
     }
     @PostMapping("/send")
     public void send(@RequestBody User user){
-        int appid = 1400863437;
+        int appid = 111;  //自己腾讯短信服务的appid
         //这里输入步骤1.5的appkey
-        String appkey = "b825a8a83541882436947bb93661631f";
+        String appkey = "";
         //{"这里输入手机号","第二个手机号"}; //手机号可以添很多。。
         String[] phoneNumbers = {user.getOldphone()};
         //这里添你申请的模板ID，注意是模板ID不是签名ID;
-        int templateId = 1961247;
+        int templateId = 1111;
         //这里添你申请的签名，注意不是ID，是签名，中文。"
         String smsSign = "nanfengTech网";
         //随机数字6位

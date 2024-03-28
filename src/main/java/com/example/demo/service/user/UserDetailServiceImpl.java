@@ -52,7 +52,7 @@ public class UserDetailServiceImpl implements UserDetailService{
 //        System.out.println(add);
         //
         if(userDetailMapper.login(user)!=null){
-            if(!userDetailMapper.login(user).getDisable()){
+            if(!userDetailMapper.login(user).isDisable()){
                 User user2 = new User();
                 user2.setId(0);
                 return user2;
