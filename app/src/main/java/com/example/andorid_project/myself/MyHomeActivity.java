@@ -15,12 +15,14 @@ import com.bumptech.glide.Glide;
 import com.example.andorid_project.Activity.BaseViewActivity;
 import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
+import com.example.andorid_project.config.dialog.MusicDialog;
 import com.example.andorid_project.dao.shouye.MusicDao;
 import com.example.andorid_project.shouye.ShouyeActivity;
 import com.example.andorid_project.shouye.enity.Bangdan;
 import com.example.andorid_project.shouye.geci.LrcBean;
 import com.example.andorid_project.shouye.geci.PraseLrc;
 import com.example.andorid_project.until.TengxunPreferenceUtil;
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -97,6 +99,62 @@ public class MyHomeActivity extends BaseViewActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyHomeActivity.this,MyMusicCollectActivity.class);
+                startActivity(intent);
+            }
+        });
+        LinearLayout jinpai_play = findViewById(R.id.jinpai_play_music);
+        jinpai_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShouyeActivity.bangdanList=ShouyeActivity.music_listen_list;
+                Quanju.PlayMusic(MyHomeActivity.this,ShouyeActivity.music_listen_list.get(0),0);
+            }
+        });
+        LinearLayout yinpai_play = findViewById(R.id.yinpai_play_music);
+        yinpai_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShouyeActivity.bangdanList=ShouyeActivity.music_listen_list;
+                Quanju.PlayMusic(MyHomeActivity.this,ShouyeActivity.music_listen_list.get(1),1);
+            }
+        });
+        LinearLayout tongpai_play = findViewById(R.id.jinpai_play_music);
+        tongpai_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShouyeActivity.bangdanList=ShouyeActivity.music_listen_list;
+                Quanju.PlayMusic(MyHomeActivity.this,ShouyeActivity.music_listen_list.get(2),2);
+            }
+        });
+        ImageView jinpai_dialog = findViewById(R.id.jinpai_music_dialog);
+        jinpai_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicDialog musicDialog = new MusicDialog();
+                musicDialog.show(MyHomeActivity.this,ShouyeActivity.music_listen_list.get(0));
+            }
+        });
+        ImageView yinpai_dialog = findViewById(R.id.yinpai_music_dialog);
+        yinpai_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicDialog musicDialog = new MusicDialog();
+                musicDialog.show(MyHomeActivity.this,ShouyeActivity.music_listen_list.get(0));
+            }
+        });
+        ImageView tongpai_dialog = findViewById(R.id.tongpai_music_dialog);
+        tongpai_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicDialog musicDialog = new MusicDialog();
+                musicDialog.show(MyHomeActivity.this,ShouyeActivity.music_listen_list.get(0));
+            }
+        });
+        MaterialButton materialButton = findViewById(R.id.myhome_bianji);
+        materialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyHomeActivity.this,SelfDetailActivity.class);
                 startActivity(intent);
             }
         });

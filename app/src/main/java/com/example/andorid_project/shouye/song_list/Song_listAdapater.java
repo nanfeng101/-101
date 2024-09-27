@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.example.andorid_project.Guide.GuideFragment;
 import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
+import com.example.andorid_project.config.dialog.MusicDialog;
+import com.example.andorid_project.myself.MyMusicCollectActivity;
 import com.example.andorid_project.shouye.ShouyeActivity;
 import com.example.andorid_project.shouye.geci.geciActivity;
 import com.example.andorid_project.shouye.enity.Bangdan;
@@ -88,6 +90,14 @@ public class Song_listAdapater extends RecyclerView.Adapter<Song_listAdapater.Vi
                     Log.d(TAG, "onClick: 歌曲已经被点击");
                     ShouyeActivity.bangdanList.addAll(list1);
                     Quanju.PlayMusic(context1,item,id);
+                }
+            });
+            ImageView music_dialog = (ImageView) itemView.findViewById(R.id.music_dialog);
+            music_dialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MusicDialog musicDialog = new MusicDialog();
+                    musicDialog.show(context1,item);
                 }
             });
         }

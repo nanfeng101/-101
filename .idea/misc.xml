@@ -34,9 +34,10 @@
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_my_home.xml" value="0.43636363636363634" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_my_music_collect.xml" value="0.25364583333333335" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_my_self.xml" value="0.264" />
+        <entry key="..\:/andorid_project/app/src/main/res/layout/activity_self_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_shouye.xml" value="0.24644549763033174" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/activity_song_list.xml" value="0.3287037037037037" />
-        <entry key="..\:/andorid_project/app/src/main/res/layout/activity_yanzheng.xml" value="0.25364583333333335" />
+        <entry key="..\:/andorid_project/app/src/main/res/layout/activity_yanzheng.xml" value="0.1" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/ceshi.xml" value="0.5585365853658537" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/divider_small.xml" value="0.15" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/drawer_content.xml" value="0.22491349480968859" />
@@ -45,8 +46,10 @@
         <entry key="..\:/andorid_project/app/src/main/res/layout/fragment_dialog_term_service2.xml" value="0.2390625" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/item_tab.xml" value="0.2" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/layout.xml" value="0.11510416666666666" />
+        <entry key="..\:/andorid_project/app/src/main/res/layout/liajnxi.xml" value="0.37712519319938176" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/lunbotu_major.xml" value="0.264" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/music.xml" value="0.22185970636215335" />
+        <entry key="..\:/andorid_project/app/src/main/res/layout/music_dialog.xml" value="0.32921174652241114" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/music_list.xml" value="0.3148148148148148" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/music_list_single.xml" value="0.22826086956521738" />
         <entry key="..\:/andorid_project/app/src/main/res/layout/music_listen_single.xml" value="0.4" />

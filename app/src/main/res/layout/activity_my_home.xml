@@ -15,11 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+
             <ImageView
-                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/myhome_backgrond"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/myhome_backgrond" />
 
         </LinearLayout>
         <LinearLayout
@@ -113,6 +114,26 @@
 
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="180dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/myhome_bianji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"
+                android:backgroundTint="@color/white"
+                android:minWidth="100dp"
+                android:text="编辑"
+                android:textColor="@color/md_theme_dark_onSurface"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                app:cornerRadius="20dp"/>
+
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="150dp"
@@ -227,45 +248,56 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/jinpai"/>
-            <androidx.cardview.widget.CardView
-                android:layout_marginLeft="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp">
-                <ImageView
-                    android:id="@+id/myhome_jinpai_music_pic"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/jinpai"/>
-            </androidx.cardview.widget.CardView>
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView android:id="@+id/myhome_jinpai_music_name"
+                android:id="@+id/yinpai_play_music"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="不谓侠"
-                android:textSize="18dp"
-                android:textColor="#000000"/>
-                <TextView
-                    android:id="@+id/myhome_jinpai_music_singer"
-                    android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/jinpai_play_music"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="小阿七"
-                    android:textSize="14dp"
-                    android:textColor="#858585"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginTop="15dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/jinpai"/>
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp">
+                        <ImageView
+                            android:id="@+id/myhome_jinpai_music_pic"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/jinpai"/>
+                    </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView android:id="@+id/myhome_jinpai_music_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="不谓侠"
+                        android:textSize="18dp"
+                        android:textColor="#000000"/>
+                        <TextView
+                            android:id="@+id/myhome_jinpai_music_singer"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="小阿七"
+                            android:textSize="14dp"
+                            android:textColor="#858585"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
             <ImageView
+                android:id="@+id/jinpai_music_dialog"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_width="30dp"
@@ -317,6 +349,7 @@
                     android:textColor="#858585"/>
             </LinearLayout>
             <ImageView
+                android:id="@+id/yinpai_music_dialog"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_width="30dp"
@@ -329,45 +362,51 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/tongpai"/>
-            <androidx.cardview.widget.CardView
-                android:layout_marginLeft="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp">
-                <ImageView
-                    android:id="@+id/myhome_tongpai_music_pic"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/tongpai"/>
-            </androidx.cardview.widget.CardView>
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView android:id="@+id/myhome_tongpai_music_name"
+                android:id="@+id/tongpai_play_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginTop="15dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/tongpai"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="不谓侠"
-                    android:textSize="18dp"
-                    android:textColor="#000000"/>
-                <TextView
-                    android:id="@+id/myhome_tongpai_music_singer"
+                    app:cardCornerRadius="20dp">
+                    <ImageView
+                        android:id="@+id/myhome_tongpai_music_pic"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/tongpai"/>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:text="小阿七"
-                    android:textSize="14dp"
-                    android:textColor="#858585"/>
+                    android:orientation="vertical">
+                    <TextView android:id="@+id/myhome_tongpai_music_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="不谓侠"
+                        android:textSize="18dp"
+                        android:textColor="#000000"/>
+                    <TextView
+                        android:id="@+id/myhome_tongpai_music_singer"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="小阿七"
+                        android:textSize="14dp"
+                        android:textColor="#858585"/>
+                </LinearLayout>
             </LinearLayout>
             <ImageView
+                android:id="@+id/tongpai_music_dialog"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_width="30dp"

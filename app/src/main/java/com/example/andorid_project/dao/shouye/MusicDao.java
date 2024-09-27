@@ -2,20 +2,9 @@ package com.example.andorid_project.dao.shouye;
 
 import static android.content.ContentValues.TAG;
 
-import android.media.MediaPlayer;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.example.andorid_project.Fragement.MajorFragment;
-import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
 import com.example.andorid_project.shouye.enity.Bangdan;
-import com.example.andorid_project.shouye.enity.Song;
 import com.example.andorid_project.shouye.enity.Song_list;
 import com.example.andorid_project.shouye.geci.LrcBean;
 import com.example.andorid_project.shouye.geci.PraseLrc;
@@ -28,9 +17,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;

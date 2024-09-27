@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Andorid_project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".myself.SelfDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".myself.MyMusicCollectActivity"
             android:exported="true" />
         <activity

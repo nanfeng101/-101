@@ -1,9 +1,6 @@
 package com.example.andorid_project.shouye.apapter;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,26 +8,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.andorid_project.dao.shouye.MusicDao;
 import com.example.andorid_project.shouye.Fragement.MusicListFragement;
 import com.example.andorid_project.shouye.ShouyeActivity;
-import com.example.andorid_project.shouye.geci.geciActivity;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.andorid_project.R;
 import com.example.andorid_project.config.Quanju;
 import com.example.andorid_project.shouye.enity.Bangdan;
-import com.example.andorid_project.shouye.enity.Song_list;
 import com.example.andorid_project.until.TengxunPreferenceUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.ViewHolder>{
     public Context context;

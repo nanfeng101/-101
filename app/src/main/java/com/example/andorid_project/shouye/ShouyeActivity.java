@@ -187,7 +187,7 @@ public class ShouyeActivity extends BaseViewActivity {
                 collectList=list1;
 
             }
-        }, 1000);
+        }, 2000);
 
 
         //提前加载我的页面需要的数据

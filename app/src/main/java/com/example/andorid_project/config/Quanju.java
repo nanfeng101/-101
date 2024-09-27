@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Quanju {
-    public static String url1="http://192.168.130.155:8081/zf/";
+    public static String url1="http://10.124.41.193:8081/zf/";
 
     public static void PlayMusic(Context context1, Bangdan item,int id){
         if(geciActivity.timer!=null){
